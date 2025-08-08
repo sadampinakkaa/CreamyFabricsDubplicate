@@ -125,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.dataset.src=
  
   
   {% render 'vital-scripts' %}
-  
+
   {%- comment %}
     {{ content_for_header }}
   {%- endcomment -%}
@@ -133,13 +133,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.dataset.src=
 
 
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
-    <script src="{{ 'vendor.js' | asset_url }}" defer></script>
-    <script src="{{ 'counter-section.js' | asset_url }}" defer></script>
-    <script src="{{ 'theme.js' | asset_url }}" defer></script>
-
-  
+  <script src="{{ 'vendor.js' | asset_url }}" defer></script>
+  <script src="{{ 'counter-section.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
   {% render 'shogun-head' %}
+
+  <script>
+    {%- render 'datora-js' -%}
+  </script>
+
 </head>
   {%- assign feature_classes = '' -%}
   {%- if settings.show_image_zoom -%}
