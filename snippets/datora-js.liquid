@@ -106,7 +106,7 @@ async function updateProductGridDiscounts() {
   
   if(getDiscountCode){
     // Verwenden Sie Promise.all statt forEach für async Operationen
-    document.querySelectorAll('[data-datora-pid]').forEach(div => {
+    const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
       let validDisc = false;
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
@@ -120,14 +120,10 @@ async function updateProductGridDiscounts() {
 
       if (!(vid && pid && price)) return;
 
-      
-      // const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
-      
-      co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
-          .then(data => {
-
+      try {
+        const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
+        
         const basePriceFormatted = priceFormatter.format(price / 100);
-        console.log("data",data.calc);
 
         if(data){
           if (data.calc === "perc" && data.discPerc > 0) {
@@ -145,7 +141,6 @@ async function updateProductGridDiscounts() {
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
             const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           }
-          console.log("validDisc",validDisc);
           if(validDisc){
             div.classList.add('discounted');
             div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
@@ -160,8 +155,12 @@ async function updateProductGridDiscounts() {
         }else{
           resetProductGridDiscount(div);
         }
-      }).catch(() => {});
+      } catch (error) {
+        console.error('Error processing discount:', error);
+      }
     });
+    
+    await Promise.all(promises);
   }
 }
 
