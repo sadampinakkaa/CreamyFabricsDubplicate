@@ -106,7 +106,7 @@ async function updateProductGridDiscounts() {
   
   if(getDiscountCode){
     // Verwenden Sie Promise.all statt forEach für async Operationen
-    const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
+    document.querySelectorAll('[data-datora-pid]').forEach(div => {
       let validDisc = false;
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
@@ -120,47 +120,43 @@ async function updateProductGridDiscounts() {
 
       if (!(vid && pid && price)) return;
 
-      try {
-        const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
-        
-        const basePriceFormatted = priceFormatter.format(price / 100);
+      
+      const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
+      
+      const basePriceFormatted = priceFormatter.format(price / 100);
 
-        if(data){
-          if (data.calc === "perc" && data.discPerc > 0) {
-            validDisc = true;
-            const discountedPrice = price - price * data.discPerc / 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
-            const discountValue = price * data.discPerc / 100;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-            const badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-          } else if (data.calc === "amt" && data.discAmt > 0) {
-            validDisc = true;
-            const discountedPrice = price - data.discAmt * 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
-            const discountValue = price - discountedPrice;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-            const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-          }
-          if(validDisc){
-            div.classList.add('discounted');
-            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-            setDatoraClasses(div, originalPriceAsComparePrice);
-            div.querySelector('[data-datora]').innerHTML = badgeText;
-            const badge = div.querySelector('.datora.discount-badge');
-            if (badge) badge.removeAttribute('hidden');
-          }else{
-            resetProductGridDiscount(div);
-          }
+      if(data){
+        if (data.calc === "perc" && data.discPerc > 0) {
+          validDisc = true;
+          const discountedPrice = price - price * data.discPerc / 100;
+          const newPrice = priceFormatter.format(discountedPrice / 100);
+          const discountValue = price * data.discPerc / 100;
+          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+          const badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+        } else if (data.calc === "amt" && data.discAmt > 0) {
+          validDisc = true;
+          const discountedPrice = price - data.discAmt * 100;
+          const newPrice = priceFormatter.format(discountedPrice / 100);
+          const discountValue = price - discountedPrice;
+          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+          const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+        }
+        if(validDisc){
+          div.classList.add('discounted');
+          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+          setDatoraClasses(div, originalPriceAsComparePrice);
+          div.querySelector('[data-datora]').innerHTML = badgeText;
+          const badge = div.querySelector('.datora.discount-badge');
+          if (badge) badge.removeAttribute('hidden');
         }else{
           resetProductGridDiscount(div);
         }
-      } catch (error) {
-        console.error('Error processing discount:', error);
+      }else{
+        resetProductGridDiscount(div);
       }
+      
     });
-    
-    await Promise.all(promises);
   }
 }
 
