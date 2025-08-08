@@ -80,6 +80,8 @@ async function updateProductGridDiscounts() {
         div.dataset.datoraPrice
       ];
 
+      console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price);
+
       if (!(vid && pid && price)) return;
 
       co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
