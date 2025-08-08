@@ -129,7 +129,12 @@
           %}
           <a href="{{ product.url }}" class="product-item-meta__title">{{ product_title }}</a>
 
-          <div class="product-item-meta__price-list-container" role="region" aria-live="polite">
+          <div class="product-item-meta__price-list-container" role="region" aria-live="polite" 
+          data-datora-vid="{{ product.selected_or_first_available_variant.id }}"
+          data-datora-pid="{{ product.id }}"
+          data-datora-spgid="{{ product.selected_or_first_available_variant.selected_selling_plan_allocation.selling_plan_group_id }}"
+          data-datora-tags="{{ product.tags }}"
+          data-datora-price="{{ product.selected_or_first_available_variant.price }}">
             <div class="price-list" data-product-price-list>
               {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
                 <span class="price price--highlight">
