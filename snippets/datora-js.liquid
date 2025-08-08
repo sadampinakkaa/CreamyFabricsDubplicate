@@ -155,58 +155,6 @@ async function updateProductGridDiscounts() {
         }else{
           resetProductGridDiscount(div);
         }
-        
-        /*
-        if (data.calc === "perc" && data.discPerc > 0) {
-          const discountedPrice = price - price * data.discPerc / 100;
-          const newPrice = priceFormatter.format(discountedPrice / 100);
-
-          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-
-          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-          setDatoraClasses(div, originalPriceAsComparePrice);
-
-          const discountValue = price * data.discPerc / 100;
-          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-
-          // Fehler: 'code' ist nicht definiert - sollte 'getDiscountCode' sein
-          div.querySelector('[data-datora]').innerHTML = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-
-          const badge = div.querySelector('.datora.discount-badge');
-          if (badge) badge.removeAttribute('hidden');
-
-        } else if (data.calc === "amt" && data.discAmt > 0) {
-          const discountedPrice = price - data.discAmt * 100;
-          const newPrice = priceFormatter.format(discountedPrice / 100);
-          
-          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-          
-          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-          setDatoraClasses(div, originalPriceAsComparePrice);
-          
-          const discountValue = price - discountedPrice;
-          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-          
-          // Fehler: 'code' ist nicht definiert - sollte 'getDiscountCode' sein  
-          div.querySelector('[data-datora]').innerHTML = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-          
-          const badge = div.querySelector('.datora.discount-badge');
-          if (badge) badge.removeAttribute('hidden');
-        } else {
-          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
-
-          const comparePriceElem = div.querySelector('.price--compare');
-          if (comparePriceElem) {
-            comparePriceElem.classList.add('visually-hidden');
-          }
-
-          const datoraInfo = div.querySelector('[data-datora]');
-          if (datoraInfo) datoraInfo.textContent = '';
-
-          const badge = div.querySelector('.datora.discount-badge');
-          if (badge) badge.setAttribute('hidden', true);
-        }
-        */
       } catch (error) {
         console.error('Error processing discount:', error);
       }
