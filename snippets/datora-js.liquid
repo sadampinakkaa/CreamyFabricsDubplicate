@@ -160,8 +160,6 @@ window.addEventListener('co2.discountCodeSet', function(event){
 });
 
 document.documentElement.addEventListener('cart:refresh', () => {
-  if(co2Initialized){
-    updateProductGridDiscounts();
-    console.log("EventListener: cart:refresh");
-  }
+  updateProductGridDiscounts();
+  console.log("EventListener: cart:refresh");
 });
