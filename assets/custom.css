@@ -2478,3 +2478,10 @@ body.new-big-redesign-ab-test .product--image-and-size-details .product--size-de
 [js-product-media-id]:not(.active) {
 	display: none;
 }
+
+.product-item-meta .price-list{
+	width: 100%;
+}
+.checkout-subtotal{
+	margin-bottom: 10px;
+}
