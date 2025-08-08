@@ -65,12 +65,12 @@ const removeDatoraDiscount = async function() {
   }
 }
 
-async function updateProductGridDiscounts() {
+function updateProductGridDiscounts() {
   if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
     return;
   }
   
-  await co2.getDiscountCode().then(code => {
+  co2.getDiscountCode().then(code => {
     document.querySelectorAll('[data-datora-pid]').forEach(div => {
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
