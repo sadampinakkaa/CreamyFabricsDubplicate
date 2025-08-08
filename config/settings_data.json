@@ -120,18 +120,6 @@
         "disabled": false,
         "settings": {}
       },
-      "14135111727648716233": {
-        "type": "shopify://apps/datora-multi-discounts/blocks/datora-multi-discounts/0868cd08-d64b-42c3-a966-1c794fdcf58d",
-        "disabled": false,
-        "settings": {}
-      },
-      "759513785179295412": {
-        "type": "shopify://apps/datora-multi-discounts/blocks/storefront-api-client/0868cd08-d64b-42c3-a966-1c794fdcf58d",
-        "disabled": false,
-        "settings": {
-          "storefront_api_token": "dfec22a212722e419242faa9bdf69c64"
-        }
-      },
       "15685250022964305326": {
         "type": "shopify://apps/elevar-conversion-tracking/blocks/dataLayerEmbed/bc30ab68-b15c-4311-811f-8ef485877ad6",
         "disabled": false,
@@ -144,10 +132,22 @@
           "home": false
         }
       },
-      "17327048248777170309": {
-        "type": "shopify://apps/dr-stacked-discounts/blocks/instant-load/f428e1ae-8a34-4767-8189-f8339f3ab12b",
+      "14135111727648716233": {
+        "type": "shopify://apps/datora-multi-discounts/blocks/datora-multi-discounts/0868cd08-d64b-42c3-a966-1c794fdcf58d",
         "disabled": true,
         "settings": {}
+      },
+      "17327048248777170309": {
+        "type": "shopify://apps/dr-stacked-discounts/blocks/instant-load/f428e1ae-8a34-4767-8189-f8339f3ab12b",
+        "disabled": false,
+        "settings": {}
+      },
+      "759513785179295412": {
+        "type": "shopify://apps/datora-multi-discounts/blocks/storefront-api-client/0868cd08-d64b-42c3-a966-1c794fdcf58d",
+        "disabled": true,
+        "settings": {
+          "storefront_api_token": "dfec22a212722e419242faa9bdf69c64"
+        }
       }
     }
   },
