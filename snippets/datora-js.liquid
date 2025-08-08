@@ -1,3 +1,8 @@
+const priceFormatter = new Intl.NumberFormat('de-DE', {
+  style: 'currency',
+  currency: 'EUR'
+});
+
 const applyDatoraDiscount = async function() {
   const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                      document.querySelector('input[name="datora-discount"]');
@@ -58,3 +63,92 @@ const removeDatoraDiscount = async function() {
     }else{ datoraCodeApplied[0].disabled = false; }
   }
 }
+
+async function updateProductGridDiscounts() {
+  if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
+    return;
+  }
+  
+  await co2.getDiscountCode().then(code => {
+    document.querySelectorAll('[data-datora-pid]').forEach(div => {
+      const [vid, pid, spgid, tags, price] = [
+        div.dataset.datoraVid,
+        div.dataset.datoraPid,
+        div.dataset.datoraSpgid,
+        div.dataset.datoraTags,
+        div.dataset.datoraPrice
+      ];
+
+      if (!(vid && pid && price)) return;
+
+      co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
+        .then(data => {
+          const basePriceFormatted = priceFormatter.format(price / 100);
+
+          if (data.calc === "perc" && data.discPerc > 0) {
+            const discountedPrice = price - price * data.discPerc / 100;
+            const newPrice = priceFormatter.format(discountedPrice / 100);
+
+            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+
+            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+            setDatoraClasses(div, originalPriceAsComparePrice);
+
+            const discountValue = price * data.discPerc / 100;
+            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+
+            div.querySelector('[data-datora]').innerHTML = `-${data.discPerc}% (${formattedDiscountValue}) ${code.toUpperCase()}`;
+
+            const badge = div.querySelector('.datora.discount-badge');
+            if (badge) badge.removeAttribute('hidden');
+
+          } else if (data.calc === "amt" && data.discAmt > 0) {
+            const discountedPrice = price - data.discAmt * 100;
+            const newPrice = priceFormatter.format(discountedPrice / 100);
+            
+            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+            
+            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+            setDatoraClasses(div, originalPriceAsComparePrice);
+            
+            const discountValue = price - discountedPrice;
+            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+            
+            div.querySelector('[data-datora]').innerHTML = `(-${formattedDiscountValue}) ${code.toUpperCase()}`;
+            
+            const badge = div.querySelector('.datora.discount-badge');
+            if (badge) badge.removeAttribute('hidden');
+          } else {
+            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
+
+            const comparePriceElem = div.querySelector('.price--compare');
+            if (comparePriceElem) {
+              comparePriceElem.classList.add('visually-hidden');
+            }
+
+            const datoraInfo = div.querySelector('[data-datora]');
+            if (datoraInfo) datoraInfo.textContent = '';
+
+            const badge = div.querySelector('.datora.discount-badge');
+            if (badge) badge.setAttribute('hidden', true);
+          }
+        }).catch(() => {});
+    });
+  }).catch(() => {});
+}
+
+window.addEventListener('co2.cart.initialized', function(event){
+  updateProductGridDiscounts();
+});
+
+window.addEventListener('co2.codelink', function(event){
+  updateProductGridDiscounts();
+});
+
+window.addEventListener('co2.discountCodeSet', function(event){
+  updateProductGridDiscounts();
+});
+
+document.documentElement.addEventListener('cart:refresh', () => {
+  updateProductGridDiscounts();
+});
