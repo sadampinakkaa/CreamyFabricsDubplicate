@@ -121,42 +121,45 @@ async function updateProductGridDiscounts() {
       if (!(vid && pid && price)) return;
 
       
-      const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
+      // const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
       
-      const basePriceFormatted = priceFormatter.format(price / 100);
-      console.log("data",data.calc);
+      co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
+          .then(data => {
 
-      if(data){
-        if (data.calc === "perc" && data.discPerc > 0) {
-          validDisc = true;
-          const discountedPrice = price - price * data.discPerc / 100;
-          const newPrice = priceFormatter.format(discountedPrice / 100);
-          const discountValue = price * data.discPerc / 100;
-          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-          const badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-        } else if (data.calc === "amt" && data.discAmt > 0) {
-          validDisc = true;
-          const discountedPrice = price - data.discAmt * 100;
-          const newPrice = priceFormatter.format(discountedPrice / 100);
-          const discountValue = price - discountedPrice;
-          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-          const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-        }
-        if(validDisc){
-          div.classList.add('discounted');
-          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-          setDatoraClasses(div, originalPriceAsComparePrice);
-          div.querySelector('[data-datora]').innerHTML = badgeText;
-          const badge = div.querySelector('.datora.discount-badge');
-          if (badge) badge.removeAttribute('hidden');
+        const basePriceFormatted = priceFormatter.format(price / 100);
+        console.log("data",data.calc);
+
+        if(data){
+          if (data.calc === "perc" && data.discPerc > 0) {
+            validDisc = true;
+            const discountedPrice = price - price * data.discPerc / 100;
+            const newPrice = priceFormatter.format(discountedPrice / 100);
+            const discountValue = price * data.discPerc / 100;
+            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+            const badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+          } else if (data.calc === "amt" && data.discAmt > 0) {
+            validDisc = true;
+            const discountedPrice = price - data.discAmt * 100;
+            const newPrice = priceFormatter.format(discountedPrice / 100);
+            const discountValue = price - discountedPrice;
+            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+            const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+          }
+          if(validDisc){
+            div.classList.add('discounted');
+            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+            setDatoraClasses(div, originalPriceAsComparePrice);
+            div.querySelector('[data-datora]').innerHTML = badgeText;
+            const badge = div.querySelector('.datora.discount-badge');
+            if (badge) badge.removeAttribute('hidden');
+          }else{
+            resetProductGridDiscount(div);
+          }
         }else{
           resetProductGridDiscount(div);
         }
-      }else{
-        resetProductGridDiscount(div);
-      }
-      
+      }).catch(() => {});
     });
   }
 }
