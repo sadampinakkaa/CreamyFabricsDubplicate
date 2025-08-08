@@ -39,7 +39,7 @@
     padding: 2px 10px;
     gap: 5px;
   }
-  .applied-discount button:disabled{
+  .applied-discount button[disabled]{
 	opacity:0.6;
 	pointer-events:none;
   }
