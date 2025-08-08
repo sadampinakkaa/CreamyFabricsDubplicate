@@ -27,9 +27,14 @@ const applyDatoraDiscount = async function() {
 
 const removeDatoraDiscount = async function() {
   const datoraCodeContainer = document.querySelector('.datora-discount-field-container');
-  const datoraCodeApplied = document.querySelectorAll('.applied-discount');
+  const datoraCodeApplied = datoraCodeContainer.querySelectorAll('.applied-discount');
   if (typeof co2 !== 'undefined' && typeof co2.removeDiscountCode === 'function') {
-    datoraCodeApplied[0].disabled = true;
+    datoraCodeApplied.forEach(element => {
+      const buttonsInElement = element.querySelectorAll('button');
+      buttonsInElement.forEach(button => {
+          button.disabled = true;
+      });
+    });
 
     let resultRemoveDiscountCode = await co2.removeDiscountCode();
     if(resultRemoveDiscountCode){
