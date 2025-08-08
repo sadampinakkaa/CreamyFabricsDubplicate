@@ -108,6 +108,7 @@ async function updateProductGridDiscounts() {
     // Verwenden Sie Promise.all statt forEach für async Operationen
     const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
       let validDisc = false;
+      let newPrice, badgeText;
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
         div.dataset.datoraPid,
