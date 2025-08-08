@@ -160,6 +160,7 @@ function updateProductGridDiscounts() {
 window.addEventListener('co2.cart.initialized', function() {
   updateProductGridDiscounts();
   console.log("EventListener: co2.cart.initialized");
+  co2Initialized = true;
 });
 
 window.addEventListener('co2.codelink', function(event){
@@ -173,6 +174,8 @@ window.addEventListener('co2.discountCodeSet', function(event){
 });
 
 document.documentElement.addEventListener('cart:refresh', () => {
-  updateProductGridDiscounts();
-  console.log("EventListener: cart:refresh");
+  if(co2Initialized){
+    updateProductGridDiscounts();
+    console.log("EventListener: cart:refresh");
+  }
 });
