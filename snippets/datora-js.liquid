@@ -106,9 +106,7 @@ async function updateProductGridDiscounts() {
   
   if(getDiscountCode){
     // Verwenden Sie Promise.all statt forEach für async Operationen
-    var $items 		= $("body").find("*[data-datora-pid]");
-    $items.each(async function(div){
-
+    document.querySelectorAll('[data-datora-pid]').forEach(div => {
       let validDisc = false;
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
@@ -126,7 +124,7 @@ async function updateProductGridDiscounts() {
       const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
       
       const basePriceFormatted = priceFormatter.format(price / 100);
-      console.log("data",data);
+      console.log("data",data.calc);
 
       if(data){
         if (data.calc === "perc" && data.discPerc > 0) {
