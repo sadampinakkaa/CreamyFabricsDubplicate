@@ -1,20 +1,15 @@
 const applyDatoraDiscount = async function() {
   const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                      document.querySelector('input[name="datora-discount"]');
-  
   if(!datoraInput) return;
-
   const discountCode = datoraInput.value.trim();
   const datoraContainer = datoraInput.closest('.datora-discount-field-container');
-
   if(discountCode.length < 1) {
     return;
   }
-
   if(datoraContainer) datoraContainer.classList.add('loading');
-  
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
-    var resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
+    let resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
       if(datoraContainer) datoraContainer.classList.add('done').remove('error', 'loading');
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
@@ -23,3 +18,32 @@ const applyDatoraDiscount = async function() {
     }
   }
 };
+
+const removeDatoraDiscount = async function() {
+  const datoraCodeContainer = document.querySelector('.datora-discount-field-container');
+  const datoraCodeApplied = document.querySelectorAll('.applied-discount');
+  if (typeof co2 !== 'undefined' && typeof co2.removeDiscountCode === 'function') {
+    datoraCodeApplied[0].disabled = true;
+
+    let resultRemoveDiscountCode = await co2.removeDiscountCode();
+    if(resultRemoveDiscountCode){
+      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+
+      const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
+                          document.querySelector('input[name="datora-discount"]');
+      if (datoraInput) datoraInput.value = '';
+
+      const datoraContainer = datoraInput?.closest('.datora-discount-field-container');
+      if (datoraContainer) {
+        datoraContainer.classList.remove('error', 'done', 'loading');
+      }
+
+      document.querySelectorAll('.price--highlight').forEach(elem => {
+        elem.classList.remove('price--highlight');
+      });
+
+      datoraCodeApplied[0].disabled = false;
+
+    }else{ datoraCodeApplied[0].disabled = false; }
+  }
+}
