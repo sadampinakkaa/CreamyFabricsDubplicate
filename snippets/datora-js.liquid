@@ -112,7 +112,7 @@ async function updateProductGridDiscounts() {
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
         div.dataset.datoraPid,
-        div.dataset.datoraSpgid,
+        div.dataset.datoraSpgid ?? false,
         div.dataset.datoraTags,
         div.dataset.datoraPrice
       ];
