@@ -88,7 +88,7 @@
           "show_order_note": false,
           "show_checkout_button": true,
           "empty_button_link": "shopify://collections/frontpage",
-          "show_recommendations": true,
+          "show_recommendations": false,
           "recommendations_title": "Wird oft zusammen gekauft:",
           "TopBar": "Über 200.000 Frauen lieben unsere Produkte 💕",
           "TopBar_b": "Über 200.000 Frauen lieben creamy",
