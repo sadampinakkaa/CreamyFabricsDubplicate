@@ -90,7 +90,8 @@ async function updateProductGridDiscounts() {
   const getDiscountCode = await co2.getDiscountCode();
   
   if(getDiscountCode){
-    document.querySelectorAll('[data-datora-pid]').forEach(div => {
+    // Verwenden Sie Promise.all statt forEach für async Operationen
+    const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
         div.dataset.datoraPid,
@@ -103,64 +104,68 @@ async function updateProductGridDiscounts() {
 
       if (!(vid && pid && price)) return;
 
-      await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
-        .then(data => {
-          const basePriceFormatted = priceFormatter.format(price / 100);
+      try {
+        const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
+        
+        const basePriceFormatted = priceFormatter.format(price / 100);
 
-          if (data.calc === "perc" && data.discPerc > 0) {
-            const discountedPrice = price - price * data.discPerc / 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
+        if (data.calc === "perc" && data.discPerc > 0) {
+          const discountedPrice = price - price * data.discPerc / 100;
+          const newPrice = priceFormatter.format(discountedPrice / 100);
 
-            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
 
-            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-            setDatoraClasses(div, originalPriceAsComparePrice);
+          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+          setDatoraClasses(div, originalPriceAsComparePrice);
 
-            const discountValue = price * data.discPerc / 100;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+          const discountValue = price * data.discPerc / 100;
+          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
 
-            div.querySelector('[data-datora]').innerHTML = `-${data.discPerc}% (${formattedDiscountValue}) ${code.toUpperCase()}`;
+          // Fehler: 'code' ist nicht definiert - sollte 'getDiscountCode' sein
+          div.querySelector('[data-datora]').innerHTML = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
 
-            const badge = div.querySelector('.datora.discount-badge');
-            if (badge) badge.removeAttribute('hidden');
+          const badge = div.querySelector('.datora.discount-badge');
+          if (badge) badge.removeAttribute('hidden');
 
-          } else if (data.calc === "amt" && data.discAmt > 0) {
-            const discountedPrice = price - data.discAmt * 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
-            
-            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-            
-            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
-            setDatoraClasses(div, originalPriceAsComparePrice);
-            
-            const discountValue = price - discountedPrice;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-            
-            div.querySelector('[data-datora]').innerHTML = `(-${formattedDiscountValue}) ${code.toUpperCase()}`;
-            
-            const badge = div.querySelector('.datora.discount-badge');
-            if (badge) badge.removeAttribute('hidden');
-          } else {
-            div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
+        } else if (data.calc === "amt" && data.discAmt > 0) {
+          const discountedPrice = price - data.discAmt * 100;
+          const newPrice = priceFormatter.format(discountedPrice / 100);
+          
+          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
+          
+          const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+          setDatoraClasses(div, originalPriceAsComparePrice);
+          
+          const discountValue = price - discountedPrice;
+          const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+          
+          // Fehler: 'code' ist nicht definiert - sollte 'getDiscountCode' sein  
+          div.querySelector('[data-datora]').innerHTML = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+          
+          const badge = div.querySelector('.datora.discount-badge');
+          if (badge) badge.removeAttribute('hidden');
+        } else {
+          div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
 
-            const comparePriceElem = div.querySelector('.price--compare');
-            if (comparePriceElem) {
-              comparePriceElem.classList.add('visually-hidden');
-            }
-
-            const datoraInfo = div.querySelector('[data-datora]');
-            if (datoraInfo) datoraInfo.textContent = '';
-
-            const badge = div.querySelector('.datora.discount-badge');
-            if (badge) badge.setAttribute('hidden', true);
+          const comparePriceElem = div.querySelector('.price--compare');
+          if (comparePriceElem) {
+            comparePriceElem.classList.add('visually-hidden');
           }
-        }).catch(() => {});
+
+          const datoraInfo = div.querySelector('[data-datora]');
+          if (datoraInfo) datoraInfo.textContent = '';
+
+          const badge = div.querySelector('.datora.discount-badge');
+          if (badge) badge.setAttribute('hidden', true);
+        }
+      } catch (error) {
+        console.error('Error processing discount:', error);
+      }
     });
-  }else{
     
+    await Promise.all(promises);
   }
 }
-
 
 window.addEventListener('co2.cart.initialized', function() {
   if(!co2Initialized){
