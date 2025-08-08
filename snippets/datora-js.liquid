@@ -157,9 +157,9 @@ function updateProductGridDiscounts() {
 }
 
 
-document.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('co2.cart.initialized', function() {
   updateProductGridDiscounts();
-  console.log("EventListener: DOMContentLoaded");
+  console.log("EventListener: co2.cart.initialized");
 });
 
 window.addEventListener('co2.codelink', function(event){
