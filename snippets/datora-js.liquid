@@ -145,6 +145,7 @@ async function updateProductGridDiscounts() {
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
             const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           }
+          console.log("validDisc",validDisc);
           if(validDisc){
             div.classList.add('discounted');
             div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
