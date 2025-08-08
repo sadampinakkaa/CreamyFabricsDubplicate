@@ -124,6 +124,7 @@ async function updateProductGridDiscounts() {
       const data = co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid);
       
       const basePriceFormatted = priceFormatter.format(price / 100);
+      console.log("data",data);
 
       if(data){
         if (data.calc === "perc" && data.discPerc > 0) {
