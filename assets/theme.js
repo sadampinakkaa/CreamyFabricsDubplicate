@@ -5626,7 +5626,7 @@ var LineItemQuantity = class extends CustomHTMLElement
       detail:
       {
         cart: cartContent,
-        replacementDelay: quantity === 0 ? 600 : 750
+        replacementDelay: quantity === 0 ? 100 : 250
       }
     }))
   }
