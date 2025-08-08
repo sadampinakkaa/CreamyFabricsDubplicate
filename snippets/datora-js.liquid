@@ -1,4 +1,5 @@
 let co2Initialized = false;
+let co2CartUpdate = false;
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
   currency: 'EUR'
@@ -174,8 +175,10 @@ window.addEventListener('co2.discountCodeSet', function(event){
 });
 
 document.documentElement.addEventListener('cart:refresh', () => {
-  if(co2Initialized){
+  if(co2Initialized && co2CartUpdate){
     updateProductGridDiscounts();
     console.log("EventListener: cart:refresh");
+  }else{
+    co2CartUpdate = true;
   }
 });
