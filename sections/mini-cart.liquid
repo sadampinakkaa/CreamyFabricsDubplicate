@@ -398,34 +398,48 @@
     <footer class="mini-cart__drawer-footer drawer__footer drawer__footer--tight drawer__footer--bordered">
       {%- capture shipping_tax_note -%}{{ 'cart.general.shipping_tax_note' | t }}{%- endcapture -%}
 
-      {%- if cart.cart_level_discount_applications != blank -%}
-        <ul class="mini-cart__discount-list list--unstyled" role="list">
-          {%- for discount_application in cart.cart_level_discount_applications -%}
-            {% if discount_application.total_allocated_amount > 0 %}
-              <li class="mini-cart__discount">
-                <span class="mini-cart__discount-badge discount-badge">{%- render 'icon' with 'discount-badge' -%}{{ discount_application.title }}</span>
-                <span class="mini-cart__discount-price text--xsmall text--subdued">-{{ discount_application.total_allocated_amount | money }}</span>
-              </li>
-            {% endif %}
-          {%- endfor -%}
-        </ul>
+      {%- if section.settings.show_datora_input -%}
+        <div class="datora-discount-field-container">
+          <div class="datora-discount-field-input">
+            <div class="input datora-input">
+              <input type="text" name="datora-discount" id="datora-discount-input" class="input__field input__field--text">
+              <label for="datora-discount" class="input__label">{{ 'shopify.checkout.order_summary.discount_label' | t }}</label>
+            </div>
+            <button type="button" onclick="applyDatoraDiscount()" class="datora-submit button button--primary">{{ 'shopify.checkout.general.submit' | t }}</button>
+          </div>
+          {%- if cart.cart_level_discount_applications != blank -%}
+            <div class="applied-discounts-wrapper">
+              {% for discount in cart.discount_applications limit:1 %}
+                {% assign discount_code = discount.title | split: ' ' | first %}
+                <div class="applied-discount">
+                  {{ discount_code }}
+                  <button 
+                    type="button" 
+                    class="remove-discount" 
+                    data-discount-code="{{ discount_code }}"
+                  >
+                    {%- render 'icon' with 'close' -%}
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          {%- endif -%}
+        </div>
+        <p class="error-msg">{{ 'shopify.discount_code_not_honoured' | t }}</p>
+      {%- else -%}
+        {%- if cart.cart_level_discount_applications != blank -%}
+          <ul class="mini-cart__discount-list list--unstyled" role="list">
+            {%- for discount_application in cart.cart_level_discount_applications -%}
+              {% if discount_application.total_allocated_amount > 0 %}
+                <li class="mini-cart__discount">
+                  <span class="mini-cart__discount-badge discount-badge">{%- render 'icon' with 'discount-badge' -%}{{ discount_application.title }}</span>
+                  <span class="mini-cart__discount-price text--xsmall text--subdued">-{{ discount_application.total_allocated_amount | money }}</span>
+                </li>
+              {% endif %}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       {%- endif -%}
-
-
-
-
-      {% comment %}
-      <span class="DrawerShippingAnnoucement">
-        <p class="DrawerShippingAnnoucement--head">Versand</p>
-        <p class="DrawerShippingAnnoucement--Content" style="    color: #008b10;">Kostenlos</p>
-      </span>
-      {% endcomment %}
-      <span class="DrawerShippingAnnoucement">
-        <p class="DrawerShippingAnnoucement--head">Umtausch</p>
-        <p class="DrawerShippingAnnoucement--Content" style="    color: #008b10;">Kostenlos</p>
-      </span>
-
-      
 
       {%- if section.settings.show_order_note or shipping_tax_note != '' -%}
         <div class="mini-cart__actions text--subdued text--xsmall">
@@ -444,6 +458,49 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+
+      {% assign original = cart.original_total_price %}
+      {% assign discounted = cart.total_price %}
+      {% assign savings = original | minus: discounted %}
+
+      <div class="checkout-subtotal"> 
+
+        {%- if section.settings.show_free_addon != 'none' -%}
+          {% assign free_addon_title = false %}
+          {%- if section.settings.show_free_addon == 'return' -%}
+            {% assign free_addon_title = "Umtausch" %}
+          {%- elsif section.settings.show_free_addon == 'shipping' -%}
+            {% assign free_addon_title = "Versand" %}
+          {%- endif -%}
+          {%- if free_addon_title -%}
+            <div class="checkout-subtotal-btn">
+              <span>{{ free_addon_title }}</span>
+              <strong style="float: right; color: #008b10;">Kostenlos</strong>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+                 
+        {% if savings > 0 %}
+          
+          <div class="checkout-subtotal-btn">
+            <span>{{ 'customer.orders.subtotal' | t }}</span>
+            <strong style="float: right;">{{ cart.original_total_price | money }}</strong>
+          </div> 
+          
+          <div>
+            <span>Ersparnis</span>
+            <strong style="float: right;">
+              -{{ savings | money }}
+            </strong>
+          </div>          
+          
+        {% endif %}
+
+        <div>
+          <span>{{ 'customer.orders.total' | t }}</span>
+          <strong style="float: right;">{{ cart.total_price | money }}</strong>
+        </div>
+      </div>
 
        {%- if section.settings.show_checkout_button -%}
         <button
@@ -518,33 +575,28 @@
           <path d="M19.5007 6.75C19.4173 6.66667 19.334 6.66667 19.2507 6.66667C19.1673 6.66667 19.084 6.66667 19.0007 6.58333C18.7507 6.5 18.4173 6.5 18.084 6.5H15.584C15.5007 6.5 15.4173 6.5 15.4173 6.58333C15.2507 6.66667 15.1673 6.75 15.1673 6.91667L14.584 10.5833V10.6667C14.584 10.4167 14.834 10.25 15.084 10.25H16.1673C18.2507 10.25 19.584 9.41667 20.0007 7.08333V6.91667C19.9173 6.83333 19.7507 6.75 19.584 6.75H19.5007Z" fill="#012169"/>
         </svg>
       </div>
-
-      
             
-{% for block in section.blocks %}
-  {% case block.type %}
-      {%- when 'image' -%}
-        {% if block.settings.image != blank %}
-          <div
-            class="product-form__image product-form__image--{{ block.settings.image_alignment }}"
-            {{ block.shopify_attributes }}
-          >
-            {%- capture image_sizes -%}{{ block.settings.image_width }}, {{ block.settings.image_width | times: 2 }}, {{ block.settings.image_width | times: 3 }}{%- endcapture -%}
-            {%- capture sizes_attribute -%}{{ block.settings.image_width }}px{%- endcapture -%}
-            {%- capture style_attribute -%}max-width: {{ block.settings.image_width }}px{%- endcapture -%}
-            {{-
-              block.settings.image
-              | image_url: width: block.settings.image.width
-              | image_tag: loading: 'lazy', sizes: sizes_attribute, widths: image_sizes, style: style_attribute
-            -}}
-          </div>
-        {%- endif -%}
-    {% endcase %}
-{% endfor %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+            {%- when 'image' -%}
+              {% if block.settings.image != blank %}
+                <div
+                  class="product-form__image product-form__image--{{ block.settings.image_alignment }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- capture image_sizes -%}{{ block.settings.image_width }}, {{ block.settings.image_width | times: 2 }}, {{ block.settings.image_width | times: 3 }}{%- endcapture -%}
+                  {%- capture sizes_attribute -%}{{ block.settings.image_width }}px{%- endcapture -%}
+                  {%- capture style_attribute -%}max-width: {{ block.settings.image_width }}px{%- endcapture -%}
+                  {{-
+                    block.settings.image
+                    | image_url: width: block.settings.image.width
+                    | image_tag: loading: 'lazy', sizes: sizes_attribute, widths: image_sizes, style: style_attribute
+                  -}}
+                </div>
+              {%- endif -%}
+          {% endcase %}
+      {% endfor %}
 
-      
-
-      
     </footer>
   {%- endif -%}
 
@@ -617,6 +669,36 @@
       "type":"text",
       "id":"TopBarGreen",
       "label":"TopBar Green"
+    },
+    {
+      "type": "header",
+      "content": "AddOns"
+    },
+    {
+      "type": "select",
+      "id": "show_free_addon",
+      "label": "Free Component",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "return",
+          "label": "Umtausch"
+        },
+        {
+          "value": "shipping",
+          "label": "Versand"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_datora_input",
+      "label": "Datora Discountcode",
+      "default": false
     }
   ],
    "blocks":[
