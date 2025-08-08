@@ -130,17 +130,17 @@ async function updateProductGridDiscounts() {
           if (data.calc === "perc" && data.discPerc > 0) {
             validDisc = true;
             const discountedPrice = price - price * data.discPerc / 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
+            newPrice = priceFormatter.format(discountedPrice / 100);
             const discountValue = price * data.discPerc / 100;
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-            const badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+            badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           } else if (data.calc === "amt" && data.discAmt > 0) {
             validDisc = true;
             const discountedPrice = price - data.discAmt * 100;
-            const newPrice = priceFormatter.format(discountedPrice / 100);
+            newPrice = priceFormatter.format(discountedPrice / 100);
             const discountValue = price - discountedPrice;
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
-            const badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+            badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           }
           if(validDisc){
             div.classList.add('discounted');
