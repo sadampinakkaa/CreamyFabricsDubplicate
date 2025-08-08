@@ -137,17 +137,17 @@
         "disabled": false,
         "settings": {}
       },
-      "17327048248777170309": {
-        "type": "shopify://apps/dr-stacked-discounts/blocks/instant-load/f428e1ae-8a34-4767-8189-f8339f3ab12b",
-        "disabled": true,
-        "settings": {}
-      },
       "1530068250781986104": {
         "type": "shopify://apps/fbp-fast-bundle/blocks/fast_bundle/9e87fbe2-9041-4c23-acf5-322413994cef",
         "disabled": true,
         "settings": {
           "home": false
         }
+      },
+      "17327048248777170309": {
+        "type": "shopify://apps/dr-stacked-discounts/blocks/instant-load/f428e1ae-8a34-4767-8189-f8339f3ab12b",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
