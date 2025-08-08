@@ -159,9 +159,11 @@ function updateProductGridDiscounts() {
 
 
 window.addEventListener('co2.cart.initialized', function() {
-  updateProductGridDiscounts();
-  console.log("EventListener: co2.cart.initialized");
-  co2Initialized = true;
+  if(!co2Initialized){
+    updateProductGridDiscounts();
+    console.log("EventListener: co2.cart.initialized");
+    co2Initialized = true;
+  }
 });
 
 window.addEventListener('co2.codelink', function(event){
