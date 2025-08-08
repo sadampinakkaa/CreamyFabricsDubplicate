@@ -14,7 +14,7 @@ const applyDatoraDiscount = async function() {
   if(datoraContainer) datoraContainer.classList.add('loading');
   
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
-    var resultChangeDiscountCode = await co2.setDiscountCode(code);
+    var resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
       if(datoraContainer) datoraContainer.classList.add('done');
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
