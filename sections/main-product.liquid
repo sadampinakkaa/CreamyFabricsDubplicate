@@ -92,7 +92,7 @@
     </div>
   </section>
   <script>
-    if(co2 && typeof updateProductGridDiscounts !== 'undefined'){
+    window.addEventListener('co2.cart.initialized', function() {
       updateProductGridDiscounts();
     }
   </script>
