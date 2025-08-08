@@ -82,12 +82,14 @@ function setDatoraClasses(parentElem, fakeComparePrice) {
   });
 }
 
-function updateProductGridDiscounts() {
+async function updateProductGridDiscounts() {
   if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
     return;
   }
+
+  const getDiscountCode = await co2.getDiscountCode();
   
-  co2.getDiscountCode().then(code => {
+  if(getDiscountCode){
     document.querySelectorAll('[data-datora-pid]').forEach(div => {
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
@@ -101,7 +103,7 @@ function updateProductGridDiscounts() {
 
       if (!(vid && pid && price)) return;
 
-      co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
+      await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" ? null : spgid)
         .then(data => {
           const basePriceFormatted = priceFormatter.format(price / 100);
 
@@ -154,7 +156,9 @@ function updateProductGridDiscounts() {
           }
         }).catch(() => {});
     });
-  }).catch(() => {});
+  }else{
+    
+  }
 }
 
 
