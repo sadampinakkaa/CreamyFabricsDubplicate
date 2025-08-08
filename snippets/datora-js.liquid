@@ -139,16 +139,20 @@ async function updateProductGridDiscounts() {
 
 window.addEventListener('co2.cart.initialized', function(event){
   updateProductGridDiscounts();
+  console.log("EventListener: co2.cart.initialized");
 });
 
 window.addEventListener('co2.codelink', function(event){
   updateProductGridDiscounts();
+  console.log("EventListener: co2.codelink");
 });
 
 window.addEventListener('co2.discountCodeSet', function(event){
   updateProductGridDiscounts();
+  console.log("EventListener: co2.discountCodeSet");
 });
 
 document.documentElement.addEventListener('cart:refresh', () => {
   updateProductGridDiscounts();
+  console.log("EventListener: cart:refresh");
 });
