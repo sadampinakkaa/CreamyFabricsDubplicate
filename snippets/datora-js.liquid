@@ -107,6 +107,7 @@ async function updateProductGridDiscounts() {
   if(getDiscountCode){
     // Verwenden Sie Promise.all statt forEach für async Operationen
     const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
+      let validDisc = false;
       const [vid, pid, spgid, tags, price] = [
         div.dataset.datoraVid,
         div.dataset.datoraPid,
@@ -125,7 +126,6 @@ async function updateProductGridDiscounts() {
         const basePriceFormatted = priceFormatter.format(price / 100);
 
         if(data){
-          let validDisc = false;
           if (data.calc === "perc" && data.discPerc > 0) {
             validDisc = true;
             const discountedPrice = price - price * data.discPerc / 100;
