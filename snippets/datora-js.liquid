@@ -141,12 +141,9 @@ async function updateProductGridDiscounts() {
 }
 
 
-document.addEventListener('co2.cart.initialized', function(event){
-  if(!co2Initialized){
-    updateProductGridDiscounts();
-    console.log("EventListener: co2.cart.initialized");
-    co2Initialized = true;
-  }
+document.addEventListener('DOMContentLoaded', function(){
+  updateProductGridDiscounts();
+  console.log("EventListener: DOMContentLoaded");
 });
 
 window.addEventListener('co2.codelink', function(event){
