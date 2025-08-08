@@ -91,6 +91,11 @@
       </div>
     </div>
   </section>
+  <script>
+    if(co2 && typeof updateProductGridDiscounts !== 'undefined'){
+      updateProductGridDiscounts();
+    }
+  </script>
 {%- else -%}
   {%- comment -%}
   The quick shop HTML being very different, we render it here. On mobile and tablet/desktop, the product renders also
