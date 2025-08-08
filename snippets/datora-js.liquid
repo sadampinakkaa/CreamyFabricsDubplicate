@@ -65,6 +65,22 @@ const removeDatoraDiscount = async function() {
   }
 }
 
+function setDatoraClasses(parentElem, fakeComparePrice) {
+  parentElem.querySelectorAll('[data-datora-classes]').forEach(elem => {
+    const newClasses = elem.dataset.datoraClasses;
+
+    if(newClasses.length === 0) {
+      return;
+    }
+
+    if(newClasses.includes('price--compare')) {
+      elem.querySelector('span:not(.visually-hidden)').textContent = fakeComparePrice;
+    }
+
+    elem.setAttribute('class', newClasses);
+  });
+}
+
 function updateProductGridDiscounts() {
   if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
     return;
