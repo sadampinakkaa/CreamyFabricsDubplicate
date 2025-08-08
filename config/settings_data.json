@@ -85,7 +85,7 @@
           "0fb570a8-2d3b-46cc-85f2-ba7c64d6bfd9"
         ],
         "settings": {
-          "show_order_note": true,
+          "show_order_note": false,
           "show_checkout_button": true,
           "empty_button_link": "shopify://collections/frontpage",
           "show_recommendations": false,
