@@ -1,3 +1,4 @@
+let co2Initialized = false;
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
   currency: 'EUR'
@@ -137,9 +138,13 @@ async function updateProductGridDiscounts() {
   }).catch(() => {});
 }
 
+
 window.addEventListener('co2.cart.initialized', function(event){
-  updateProductGridDiscounts();
-  console.log("EventListener: co2.cart.initialized");
+  if(!co2Initialized){
+    updateProductGridDiscounts();
+    console.log("EventListener: co2.cart.initialized");
+    co2Initialized = true;
+  }
 });
 
 window.addEventListener('co2.codelink', function(event){
