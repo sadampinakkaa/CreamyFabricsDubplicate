@@ -11,10 +11,16 @@ const applyDatoraDiscount = async function() {
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
     let resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
-      if(datoraContainer) datoraContainer.classList.add('done').remove('error', 'loading');
+      if(datoraContainer){
+        datoraContainer.classList.add('done');
+        datoraContainer.classList.remove('error', 'loading');
+      }
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     } else {
-      if(datoraContainer) datoraContainer.classList.add('error').remove('done', 'loading');
+      if(datoraContainer){
+        datoraContainer.classList.add('error');
+        datoraContainer.classList.remove('done', 'loading');
+      }
     }
   }
 };
