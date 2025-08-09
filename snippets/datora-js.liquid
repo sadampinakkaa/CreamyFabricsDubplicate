@@ -2,6 +2,11 @@ let co2Initialized = false;
 let co2CartUpdate = false;
 let co2CheckApply = false;
 let co2CheckReverse = false;
+const co2ErrorAlerts = {
+  "double": "Der Code [CODE] ist bereits aktiv!",
+  "invalid": "Der Code [CODE] kann nicht eingelöst werden!",
+  "failed": "Der Code [CODE] ist ungültig!"
+};
 
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -31,6 +36,7 @@ const applyDatoraDiscount = async function() {
     if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
       if(datoraContainer) datoraContainer.classList.remove('loading');
       if(datoraContainer) datoraContainer.classList.add('error');
+      errorDatoraDiscount('show', 'double', discountCode);
       return;
     }
     const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
@@ -39,7 +45,7 @@ const applyDatoraDiscount = async function() {
       sessionStorage.setItem("lastDiscountCode",cleanCode);
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     } else {
-      if(datoraContainer) datoraContainer.classList.add('error');
+      errorDatoraDiscount('show', 'failed', discountCode);
     }
     if(datoraContainer) datoraContainer.classList.remove('loading');
   }else{
@@ -87,6 +93,27 @@ function setDatoraClasses(parentElem, fakeComparePrice) {
     }
     elem.setAttribute('class', newClasses);
   });
+}
+
+function errorDatoraDiscount(type = 'show', reason = 'failed', code = '') {
+  const cartDrawer = document.querySelector('cart-drawer');
+  const datoraContainer = document.querySelector('.datora-discount-field-container');
+  if(type == "show"){
+    let errorAlert = co2ErrorAlerts[reason] ?? "ERROR";
+    errorAlert = errorAlert.replace("[CODE]",code);
+    if(reason == "double"){
+      if(datoraContainer) datoraContainer.classList.add('error');
+    }else if(reason == "invalid"){
+      if(datoraContainer) datoraContainer.classList.add('error');
+    }else{
+      if(cartDrawer) datoraContainer.classList.add('error');
+    }
+    if(datoraContainer) datoraContainer.querySelector('.datora-discount-error span').innerHTML = errorAlert;
+  }else{
+    event.preventDefault();
+    if(cartDrawer) cartDrawer.classList.remove('error');
+    if(datoraContainer) datoraContainer.classList.remove('error');
+  }
 }
 
 function resetProductGridDiscount(div){
@@ -272,7 +299,8 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
           if(cartDiscount && cartDiscount == co2CheckApply && !cartContent.discount_codes[0].applicable){
             console.log("co2CheckApply faild");
             co2CheckApply = false;
-            document.querySelector('#mini-cart').classList.add('error');
+            //document.querySelector('#mini-cart').classList.add('error');
+            errorDatoraDiscount('show', 'invalid', cartDiscount);
             if(co2CheckReverse){
               const resultChangeDiscountCode = await co2.setDiscountCode(co2CheckReverse);
               if(resultChangeDiscountCode){
