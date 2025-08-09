@@ -87,6 +87,14 @@ function resetProductGridDiscount(div){
   const oldPrice = div.dataset.datoraPrice;
   const oldCompare = div.dataset.datoraCompare;
   const oldCompareCheck = (oldCompare && oldCompare != "") ? parseInt(oldCompare) : 0;
+  let priceClass = "";
+  const productMeta = div.closest('product-meta');
+  if(productMeta){
+    const productMetaPriceClass = productMeta.getAttribute("price-class");
+    if(productMetaPriceClass){
+      priceClass = productMetaPriceClass;
+    }
+  }
   if(oldCompareCheck > 0){
   
   }else{
@@ -99,6 +107,9 @@ function resetProductGridDiscount(div){
   }
   const basePriceFormatted = priceFormatter.format(oldPrice / 100);
   div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
+  if(priceClass != ""){
+    div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').classList.add(priceClass);
+  }
   const datoraInfo = div.querySelector('[data-datora]');
   if (datoraInfo) datoraInfo.textContent = '';
   const badge = div.querySelector('.datora.discount-badge');
