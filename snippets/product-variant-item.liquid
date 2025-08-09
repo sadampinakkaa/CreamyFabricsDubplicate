@@ -134,11 +134,12 @@
             </span>
 
           {%- endif -%}
-        </div>
-        <li class="datora discount-badge" hidden>
+          <li class="datora discount-badge" hidden>
           {%- render 'icon' with 'discount-badge' -%}
           <span data-datora></span>
         </li>
+        </div>
+        
       </div>
       
       {% unless variant.metafields.custom.new_variant_not_for_sale and hide_ratings %}
