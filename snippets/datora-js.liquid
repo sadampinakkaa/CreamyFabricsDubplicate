@@ -1,6 +1,6 @@
 let co2Initialized = false;
 let co2CartUpdate = false;
-let co2CheckCode = false;
+let co2CheckApply = false;
 
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -30,10 +30,9 @@ const applyDatoraDiscount = async function() {
       if(datoraContainer) datoraContainer.classList.add('error');
       return;
     }
-    co2CheckCode = discountCode;
+    co2CheckApply = discountCode.trim().toUpperCase();
     const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
-      co2CheckCode = false;
       const cleanCode = discountCode.trim().toUpperCase();
       sessionStorage.setItem("lastDiscountCode",cleanCode);
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
@@ -260,6 +259,12 @@ document.documentElement.addEventListener('cart:refresh', () => {
   if(co2Initialized && co2CartUpdate){
     updateProductGridDiscounts();
     console.log("EventListener: cart:refresh");
+    if(co2CheckApply){
+      const getCurrentDiscountCode = await co2.getDiscountCode();
+      if(co2CheckApply !== getCurrentDiscountCode.trim().toUpperCase()){
+        console.log("co2CheckApply faild");
+      }
+    }
   }else{
     co2CartUpdate = true;
   }
