@@ -1,5 +1,6 @@
 let co2Initialized = false;
 let co2CartUpdate = false;
+let co2CheckCode = false;
 
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -35,6 +36,7 @@ const applyDatoraDiscount = async function() {
       sessionStorage.setItem("lastDiscountCode",cleanCode);
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     } else {
+      co2CheckCode = discountCode;
       if(datoraContainer) datoraContainer.classList.add('error');
     }
     if(datoraContainer) datoraContainer.classList.remove('loading');
