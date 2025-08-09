@@ -279,7 +279,7 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
           if(cartDiscount && cartDiscount == co2CheckApply && !cartContent.discount_codes[0].applicable){
             console.log("co2CheckApply faild");
             co2CheckApply = false;
-            co2CheckError = true;
+            //co2CheckError = true;
             const datoraContainer = document.querySelector('.datora-discount-field-container');
             if(datoraContainer){
               //datoraContainer.classList.add('error');
