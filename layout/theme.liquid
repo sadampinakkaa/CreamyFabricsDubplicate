@@ -265,7 +265,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           
  {% capture bss_ltap_fl_redirect %}{% render 'bss-ltap-fl-redirect.liquid' %}{% endcapture %}{% unless bss_ltap_fl_redirect contains "Liquid error" %}{% render 'bss-ltap-fl-redirect.liquid' %}{% endunless %}  {{ 'custom.min.js' | asset_url | script_tag }} 
         
-<script defer src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
 <script>
     var klaviyo = klaviyo || [];
     klaviyo.init({
