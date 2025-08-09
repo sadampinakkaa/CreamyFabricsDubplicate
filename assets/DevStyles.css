@@ -211,6 +211,11 @@ span.bulletPointsContent {
 
 .product-meta__label-list.label-list {
   margin-left: 0 !important;
+  text-align: right;
+  display: flex;
+  align-items: end;
+  align-self: center;
+  gap: 8px;
 }
 
 
