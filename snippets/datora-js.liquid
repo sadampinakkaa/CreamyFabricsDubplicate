@@ -118,6 +118,8 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
       }
     }else{
       if(cartDrawer) cartDrawer.classList.add('error');
+      if(datoraContainer) datoraContainer.querySelector('.datora-input input').value = '';
+      if(datoraContainer) datoraContainer.querySelector('.datora-input input').classList.remove('is-filled');
       window.co2ErrorAlert = errorAlert;
     }
     if(datoraContainer) datoraContainer.querySelector('.datora-discount-error span').innerHTML = errorAlert;
