@@ -24,13 +24,13 @@ const applyDatoraDiscount = async function() {
   if(datoraContainer) datoraContainer.classList.remove('error');
   if(datoraContainer) datoraContainer.classList.add('loading');
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
+    co2CheckApply = discountCode.trim().toUpperCase();
     const getCurrentDiscountCode = await co2.getDiscountCode();
     if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
       if(datoraContainer) datoraContainer.classList.remove('loading');
       if(datoraContainer) datoraContainer.classList.add('error');
       return;
     }
-    co2CheckApply = discountCode.trim().toUpperCase();
     const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
       const cleanCode = discountCode.trim().toUpperCase();
