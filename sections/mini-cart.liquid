@@ -409,7 +409,7 @@
               type="button" 
               class="datora-discount-error-close" 
               title="{{ 'general.accessibility.close' | t | escape }}"
-              onclick="event.preventDefault();document.querySelector('.datora-discount-field-container').classList.remove('error'); ">
+              onclick="errorDatoraDiscount('hide');">
               {%- render 'icon' with 'close' -%}
             </button>
           </span>
