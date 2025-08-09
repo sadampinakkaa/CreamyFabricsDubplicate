@@ -265,7 +265,8 @@ document.documentElement.addEventListener('cart:refresh', (result) => {
       if(cartContent.discount_codes && cartContent.discount_codes.length >= 1){
         if(cartContent.discount_codes[0].applicable){
           const cartDiscount = cartContent.discount_codes[0].trim().toUpperCase();
-          if(cartDiscount ==co2CheckApply && !cartContent.discount_codes[0].applicable){
+          console.log("CHECK", cartDiscount, co2CheckApply, cartContent.discount_codes[0].applicable);
+          if(cartDiscount == co2CheckApply && !cartContent.discount_codes[0].applicable){
             console.log("co2CheckApply faild");
           }
         }
