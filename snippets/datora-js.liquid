@@ -165,7 +165,7 @@ async function updateProductGridDiscounts() {
             if(metaPriceClass != ""){
               div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').classList.add(metaPriceClass);
             }
-            if(metaFormId && document.querySelector("product-sticky-form[form-id='"+metaFormId+"']"){
+            if(metaFormId && document.querySelector("product-sticky-form[form-id='"+metaFormId+"']")){
               document.querySelector("product-sticky-form[form-id='"+metaFormId+"'] .product-sticky-form__price span:not(.visually-hidden)").textContent = newPrice;
             }
             const originalPriceAsComparePrice = priceFormatter.format(price / 100);
