@@ -154,7 +154,7 @@
       <div id="successDiscountBar" class="{{ text_size_class }}" 
         style="--sdb-bg:{{ section.settings.discount_color_bg | default:'#080' }};
         --sdb-text:{{ section.settings.discount_color_text | default:'#FFF' }};
-        --sdb-border:{{ section.settings.discount_color_text | color_lighten: 50 }};">
+        --sdb-border:{{ section.settings.discount_color_text | color_modify: 'alpha', 0.5 }};">
         <svg
             height="14px"
             width="14px"
