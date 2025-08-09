@@ -231,6 +231,8 @@ window.addEventListener('co2.codelink', async function(event){
     const successTextElmData = successTextElm.getAttribute("data-text");
     const addSuccessText = successTextElmData.replace("[[CODE]]",cleanCode);
     console.log("addSuccessText", addSuccessText);
+    successTextElm.innerHTML = addSuccessText;
+    successDiscountBar.classList.add('show');
   }
 });
 
