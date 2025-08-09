@@ -221,18 +221,18 @@ window.addEventListener('co2.cart.initialized', function() {
 });
 
 window.addEventListener('co2.codelink', async function(event){
-  //updateProductGridDiscounts();
-  console.log("EventListener: co2.codelink", event);
-  const getCurrentDiscountCode = await co2.getDiscountCode();
-  if(getCurrentDiscountCode){
-    const cleanCode = getCurrentDiscountCode.trim().toUpperCase();
-    const successDiscountBar = document.querySelector("#successDiscountBar");
-    const successTextElm = successDiscountBar.querySelector("span");
-    const successTextElmData = successTextElm.getAttribute("data-text");
-    const addSuccessText = successTextElmData.replace("[[CODE]]",cleanCode);
-    console.log("addSuccessText", addSuccessText);
-    successTextElm.innerHTML = addSuccessText;
-    successDiscountBar.classList.add('show');
+  console.log("EventListener: co2.codelink");
+  const successDiscountBar = document.querySelector("#successDiscountBar");
+  if(successDiscountBar){
+    const getCurrentDiscountCode = await co2.getDiscountCode();
+    if(getCurrentDiscountCode){
+      const cleanCode = getCurrentDiscountCode.trim().toUpperCase();
+      const successTextElm = successDiscountBar.querySelector("span");
+      const successTextElmData = successTextElm.getAttribute("data-text");
+      const addSuccessText = successTextElmData.replace("[[CODE]]",cleanCode);
+      successTextElm.innerHTML = addSuccessText;
+      successDiscountBar.classList.add('show');
+    }
   }
 });
 
