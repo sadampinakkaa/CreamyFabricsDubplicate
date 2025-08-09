@@ -56,12 +56,7 @@ const removeDatoraDiscount = async function() {
         datoraContainer.classList.remove('error', 'done', 'loading');
       }
 
-      document.querySelectorAll('.price--highlight').forEach(elem => {
-        elem.classList.remove('price--highlight');
-      });
-
       document.querySelectorAll('.discounted[data-datora-price]').forEach(div => {
-        const oldPrice = div.dataset.datoraPrice;
         resetProductGridDiscount(div);
       });
 
