@@ -549,6 +549,20 @@
         </a>
       {%- endif -%}
 
+      <div class="dgs-block-payments">
+        <ul>
+          {% assign payment_types = localization.market.metafields.ngt.payment_gateways.value %}
+          {%- for type in payment_types -%}
+            <li>
+              {% comment %}
+                <img src="{{ type | payment_type_img_url }}" width="46" height="" class="icon icon--full-color" alt="{{ type }}">
+              {% endcomment %}
+              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
       <div class="mini-cart__payment-icons new-big-redesign-ab-test-b">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 32 20" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M29.1667 0H2.5C1.08333 0 0 1.08333 0 2.5V17.5C0 18.9167 1.16667 20 2.5 20H29.1667C30.5833 20 31.6667 18.9167 31.6667 17.5V2.5C31.6667 1.08333 30.5 0 29.1667 0Z" fill="#FFB3C7"/>
@@ -730,6 +744,13 @@
       "id": "show_free_custom",
       "label": "Custom Component",
       "default": "Custom text"
+    },
+    {
+      "type": "textarea",
+      "id": "payment_icons",
+      "label": "Payment Icons",
+      "default": "paypal\nmaster\nvisa",
+      "info": "List the handle of the payment providers. Separate with a new line."
     },
     {
       "type": "header",
