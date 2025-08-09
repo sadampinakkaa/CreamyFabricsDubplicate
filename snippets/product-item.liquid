@@ -243,8 +243,9 @@
         data-datora-vid="{{ cheapest_variant.id }}"
         data-datora-pid="{{ product.id }}"
         data-datora-spgid="false"
-        data-datora-tags="{{ product.tags }}"
+        data-datora-tags="{{ product.tags | join:',' }}"
         data-datora-price="{{ cheapest_variant.price }}"
+        data-datora-compare="{{ cheapest_variant.compare_at_price }}"
        >
         <div class="price-list price-list--centered">
           {%- if product.price_varies and product.compare_at_price -%}
