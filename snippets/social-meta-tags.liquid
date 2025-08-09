@@ -97,7 +97,7 @@ More information:
           } else if (isExtensionOrKlaviyoScript && !node.src.includes("datora")) {
             node.setAttribute("data-src", node.src);
             node.removeAttribute("src");
-          } else if (containsBlockedKeywords) {
+          } else if (containsBlockedKeywords && !node.src.includes("discount-on-cart-pro")) {
             node.type = "text/javascripts";
           }
         }
