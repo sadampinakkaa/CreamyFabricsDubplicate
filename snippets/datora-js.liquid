@@ -151,6 +151,7 @@ async function updateProductGridDiscounts() {
       }
 
       try {
+        console.log("updateProductGridDiscounts 2",Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
         const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
         
         const basePriceFormatted = priceFormatter.format(price / 100);
