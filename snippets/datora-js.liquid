@@ -106,7 +106,8 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
   const datoraContainer = document.querySelector('.datora-discount-field-container');
   if(type == "show"){
     let errorAlert = co2ErrorAlerts[reason] ?? "ERROR";
-    errorAlert = errorAlert.replace("[CODE]",code);
+    const cleanCode = code.trim().toUpperCase();
+    errorAlert = errorAlert.replace("[CODE]",cleanCode);
     if(reason != "invalid"){
       if(datoraContainer) datoraContainer.classList.add('error');
       if(reason == "empty"){
