@@ -207,14 +207,15 @@ function updateProductGridDiscounts() {
               const discountValue = price * data.discPerc / 100;
               const formattedDiscountValue = formatPrice(discountValue / 100);
               //badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
-              badgeText = `-${data.discPerc}% | ${getDiscountCode.toUpperCase()}`;
+              badgeText = `<b>-${data.discPerc}%</b> (${getDiscountCode.toUpperCase()})`;
             } else if (data.calc === "amt" && data.discAmt > 0) {
               validDisc = true;
               const discountedPrice = price - data.discAmt * 100;
               newPrice = formatPrice(discountedPrice / 100);
               const discountValue = price - discountedPrice;
               const formattedDiscountValue = formatPrice(discountValue / 100);
-              badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+              //badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+              badgeText = `-${formattedDiscountValue} | ${getDiscountCode.toUpperCase()}`;
             }
             if(validDisc){
               div.classList.add('discounted');
