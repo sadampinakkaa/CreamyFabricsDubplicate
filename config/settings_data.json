@@ -94,7 +94,11 @@
           "TopBar_b": "Über 200.000 Frauen lieben creamy",
           "TopBarGreen": "<b>Gute Wahl!</b> Hier sind deine Produkte:",
           "show_free_addon": "return",
-          "show_datora_input": true
+          "datora_input_show": true,
+          "datora_error_empty": "Trage bitte einen Code ein!",
+          "datora_error_double": "Der Code <b>[[CODE]]</b> ist bereits aktiv!",
+          "datora_error_failed": "Der Code <b>[[CODE]]</b> ist ungültig!",
+          "datora_error_invalid": "Der Code <b>[[CODE]]</b> existiert nicht!"
         }
       }
     },
