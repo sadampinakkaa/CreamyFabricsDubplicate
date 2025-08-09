@@ -203,11 +203,9 @@ async function checkDiscountCode() {
   if(getCurrentDiscountCode){
     const cleanCode 			= getCurrentDiscountCode.trim().toUpperCase();
     if(sessionStorage_code ===  null || cleanCode != sessionStorage_code){
-      sessionStorage.setItem("lastDiscountCode",cleanCode);
+      sessionStorage.setItem("lastDiscountCode", cleanCode);
       window.dispatchEvent(new CustomEvent('co2.codelink'));
     }
-  }else{ 
-    sessionStorage.removeItem("lastDiscountCode");
   }
 }
 
