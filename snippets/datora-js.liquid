@@ -1,5 +1,5 @@
 
-window.co2CheckApply = false;
+window.co2CheckApply = window.co2CheckReverse = false;
 let co2Initialized = false;
 let co2CartUpdate = false;
 let co2CheckApply = false;
@@ -38,7 +38,7 @@ const applyDatoraDiscount = async function() {
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
     window.co2CheckApply = co2CheckApply = discountCode.trim().toUpperCase();
     const getCurrentDiscountCode = await co2.getDiscountCode();
-    if(getCurrentDiscountCode){ co2CheckReverse = getCurrentDiscountCode; }
+    if(getCurrentDiscountCode){ window.co2CheckReverse = co2CheckReverse = getCurrentDiscountCode; }
     if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
       if(datoraContainer) datoraContainer.classList.remove('loading');
       errorDatoraDiscount('show', 'double', discountCode);
