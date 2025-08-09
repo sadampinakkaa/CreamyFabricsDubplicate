@@ -50,9 +50,9 @@ const removeDatoraDiscount = async function() {
           button.disabled = true;
       });
     });
-
     let resultRemoveDiscountCode = await co2.removeDiscountCode();
     if(resultRemoveDiscountCode){
+      sessionStorage.removeItem("lastDiscountCode");
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
       const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                           document.querySelector('input[name="datora-discount"]');
@@ -195,8 +195,25 @@ async function updateProductGridDiscounts() {
   }
 }
 
+async function checkDiscountCode() {
+  const sessionStorage_code 	= sessionStorage.getItem("lastDiscountCode");
+  const getCurrentDiscountCode = await co2.getDiscountCode();
+  if(getCurrentDiscountCode){
+    const cleanCode 			= getCurrentDiscountCode.trim().toUpperCase();
+    if(sessionStorage_code ===  null || cleanCode != sessionStorage_code){
+      sessionStorage.setItem("lastDiscountCode",cleanCode);
+      window.dispatchEvent(new CustomEvent('co2.codelink'), {
+        detail: { code: cleanCode },
+      });
+    }
+  }else{ 
+    sessionStorage.removeItem("lastDiscountCode");
+  }
+}
+
 window.addEventListener('co2.cart.initialized', function() {
   if(!co2Initialized){
+    checkDiscountCode();
     updateProductGridDiscounts();
     console.log("EventListener: co2.cart.initialized");
     co2Initialized = true;
@@ -204,7 +221,7 @@ window.addEventListener('co2.cart.initialized', function() {
 });
 
 window.addEventListener('co2.codelink', function(event){
-  updateProductGridDiscounts();
+  //updateProductGridDiscounts();
   console.log("EventListener: co2.codelink");
 });
 
