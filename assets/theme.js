@@ -5458,7 +5458,7 @@ var CartDrawer = class extends DrawerContent
     const co2ErrorAlert = ('co2ErrorAlert' in window) ? window.co2ErrorAlert : false;
     console.log("appliedDiscounts", appliedDiscounts.length, window.co2CheckApply, window.co2CheckReverse);
     if(appliedDiscounts.length == 0 && co2CheckApply && co2CheckReverse) return;
-    if(appliedDiscounts.length > 0 && co2CheckApply && co2CheckReverse) window.co2CheckApply = window.co2CheckReverse = false;
+    if(appliedDiscounts.length > 0 && co2CheckApply) window.co2CheckApply = window.co2CheckReverse = false;
     if(currentCartDrawer.classList.contains('error') && co2ErrorAlert) {
       fakeDiv.querySelector('.datora-discount-field-container .datora-discount-error span').innerHTML = co2ErrorAlert;
       window.co2ErrorAlert = false;
