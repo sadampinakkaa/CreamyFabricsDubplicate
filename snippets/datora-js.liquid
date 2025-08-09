@@ -105,9 +105,9 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
     errorAlert = errorAlert.replace("[CODE]",code);
     if(reason != "invalid"){
       if(datoraContainer) datoraContainer.classList.add('error');
-      if(reason != "empty"){
+      if(reason == "empty"){
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
-      }else if(reason != "double"){
+      }else if(reason == "double"){
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').value = '';
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
       }
