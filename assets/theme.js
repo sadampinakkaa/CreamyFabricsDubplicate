@@ -4970,13 +4970,13 @@ var ProductMeta = class extends HTMLElement
         // Check if there's a sale (compare_at_price is higher than current price)
         if (variant.compare_at_price > variant.price) {
             // Sale price display
-            productPrices.innerHTML += `
+            productPrices.innerHTML += '
                 <span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight">
                     <span class="visually-hidden" data-datora-classes="price price--compare">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
                     ${formatMoney(variant.price, currencyFormat)}
-                </span>`;
+                </span>';
             
             // Original price (crossed out)
             productPrices.innerHTML += `
@@ -4988,13 +4988,13 @@ var ProductMeta = class extends HTMLElement
                 </span>`;
         } else {
             // Regular price display (no sale)
-            productPrices.innerHTML += `
+            productPrices.innerHTML += '
                 <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
                     <span class="visually-hidden">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
                     ${formatMoney(variant.price, currencyFormat)}
-                </span>`;
+                </span>';
               // Original price (crossed out)
             productPrices.innerHTML += `
                 <span class="hidden" data-datora-classes="price price--compare">
