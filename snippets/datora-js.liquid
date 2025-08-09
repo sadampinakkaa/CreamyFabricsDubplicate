@@ -251,6 +251,7 @@ window.addEventListener('co2.cart.initialized', function() {
   if(!co2Initialized){
     updateProductGridDiscounts();
     checkDiscountCode();
+    document.documentElement.dispatchEvent(new CustomEvent('cart:update'));
     console.log("EventListener: co2.cart.initialized");
     co2Initialized = true;
   }
