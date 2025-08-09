@@ -4980,7 +4980,6 @@ var ProductMeta = class extends HTMLElement
                     </span>
                     <span>${formatMoney(variant.compare_at_price, currencyFormat)}</span>
                 </span>`;
-            productPrices.querySelector(".price--highlight").classList.add("price--large");
         } else {
             productPrices.innerHTML += `
                 <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
@@ -4996,7 +4995,6 @@ var ProductMeta = class extends HTMLElement
                     </span>
                     <span></span>
                 </span>`;
-            productPrices.querySelector(".price--highlight").classList.add("price--large");
         }
 
         // Add unit price measurement if available
