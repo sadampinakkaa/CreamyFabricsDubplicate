@@ -5471,7 +5471,7 @@ var CartDrawer = class extends DrawerContent
         transform: ["translateY(40px)", "translateY(0)"]
       },
       {
-        duration: 450,
+        duration: 250,
         easing: "cubic-bezier(0.33, 1, 0.68, 1)"
       }) : this.querySelector(".drawer__content").scrollTop = previousPosition, event?.detail?.openMiniCart && (this.clientWidth, this.open = !0)
     }, event?.detail?.replacementDelay || this.nextReplacementDelay), this.nextReplacementDelay = 0
@@ -5596,7 +5596,7 @@ var FreeShippingBar = class extends HTMLElement
   }
   _onCartUpdated(event)
   {
-    console.log("CART",event.detail.cart);
+    //console.log("CART",event.detail.cart);
     const totalPrice = event.detail.cart.items.filter(item => item.requires_shipping).reduce((sum, item) => sum + item.final_line_price, 0);
     this.style.setProperty("--progress", Math.min(totalPrice / this.threshold, 1))
   }
