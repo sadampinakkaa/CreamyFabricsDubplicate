@@ -404,7 +404,10 @@
         data-error-double="{{ section.settings.datora_error_double }}" 
         data-error-failed="{{ section.settings.datora_error_failed }}" 
         data-error-invalid="{{ section.settings.datora_error_invalid }}">
-          <span class="datora-discount-error">
+          <span class="datora-discount-error" 
+            style="--edb-bg:{{ section.settings.discount_color_bg | default:'#f8d7da' }};
+            --edb-text:{{ section.settings.discount_color_text | default:'#721c24' }};
+            --edb-border:{{ section.settings.discount_color_text | color_modify: 'alpha', 0.5 }};">
             <span></span>
             <button 
               type="button" 
@@ -724,6 +727,20 @@
       "id": "datora_input_show",
       "label": "Enable CodeInput",
       "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type": "color",
+      "id": "discount_color_bg",
+      "label": "Background",
+      "default": "#f8d7da"
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type": "color",
+      "id": "discount_color_text",
+      "label": "Text",
+      "default": "#721c24"
     },
     {
       "visible_if": "{{ section.settings.datora_input_show }}",
