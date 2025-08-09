@@ -4939,7 +4939,14 @@ var ProductMeta = class extends HTMLElement
   }
   _onVariantChanged(event)
   {
-    this._updateLabels(event.detail.variant), this._updatePrices(event.detail.variant), this._updateSku(event.detail.variant)
+    this._updateData(event.detail.variant), this._updatePrices(event.detail.variant), this._updateSku(event.detail.variant)
+  }
+  _updateData(variant)
+  {
+    const productDataElm = this.querySelectorAll('[data-datora-pid]'));
+    productDataElm.setAttribute('data-datora-vid', variant.id);
+    productDataElm.setAttribute('data-datora-price', variant.price);
+    productDataElm.setAttribute('data-datora-compare', variant.compare_at_price);
   }
   _updateLabels(variant)
   {
