@@ -18,27 +18,28 @@ const applyDatoraDiscount = async function() {
                      document.querySelector('input[name="datora-discount"]');
   if(!datoraInput) return;
   const discountCode = datoraInput.value.trim();
+  if(discountCode.length < 1) return;
   const datoraContainer = datoraInput.closest('.datora-discount-field-container');
-  if(discountCode.length < 1) {
-    return;
-  }
+  if(datoraContainer) datoraContainer.classList.remove('error');
   if(datoraContainer) datoraContainer.classList.add('loading');
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
-    let resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
+    const getCurrentDiscountCode = await co2.getDiscountCode();
+    if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
+      if(datoraContainer) datoraContainer.classList.remove('loading');
+      if(datoraContainer) datoraContainer.classList.add('error');
+      return;
+    }
+    const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
-      if(datoraContainer){
-        datoraContainer.classList.add('loading');
-        datoraContainer.classList.remove('error');
-      }
-      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
       const cleanCode = discountCode.trim().toUpperCase();
       sessionStorage.setItem("lastDiscountCode",cleanCode);
+      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     } else {
-      if(datoraContainer){
-        datoraContainer.classList.add('error');
-        datoraContainer.classList.remove('loading');
-      }
+      if(datoraContainer) datoraContainer.classList.add('error');
     }
+    if(datoraContainer) datoraContainer.classList.remove('loading');
+  }else{
+    if(datoraContainer) datoraContainer.classList.remove('loading');
   }
 };
 
