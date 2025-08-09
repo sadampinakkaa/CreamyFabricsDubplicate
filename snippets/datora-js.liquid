@@ -6,9 +6,9 @@ const priceFormatter = new Intl.NumberFormat('de-DE', {
   currencyDisplay: 'symbol'
 });
 const formatPrice = function(price){
-  const formatted = priceFormatter.format(price);
+  let formatted = priceFormatter.format(price);
   console.log(formatted);
-  const splitted = formatted.split(' ');
+  let splitted = formatted.split(' ');
   console.log(splitted);
   return splitted[1]+splitted[0];
 }
