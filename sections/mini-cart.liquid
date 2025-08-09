@@ -553,7 +553,7 @@
         <ul>
           {% assign payment_types = section.settings.payment_icons | newline_to_br | split: '<br />' %}
           {%- for type in payment_types -%}
-            {% assign clean_type = type | url_encode | escape | replace:'%0A','' | strip %}
+            {% assign clean_type = type | url_encode | escape | replace:'%0A','' | replace:'-','_' | strip %}
             <li data-payment="{{- clean_type -}}">
               {{- clean_type| payment_type_svg_tag: class: 'icon icon--full-color' -}}
             </li>
