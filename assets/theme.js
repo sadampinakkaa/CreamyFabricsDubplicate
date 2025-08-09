@@ -4957,6 +4957,7 @@ var ProductMeta = class extends HTMLElement
   }
   _updatePrices(variant)
   {
+      console.log("this.priceClass", this.priceClass);
     let productPrices = this.querySelector("[data-product-price-list]"),
       currencyFormat = window.themeVariables.settings.currencyCodeEnabled ? window.themeVariables.settings.moneyWithCurrencyFormat : window.themeVariables.settings.moneyFormat;
     if (productPrices)
@@ -4970,7 +4971,7 @@ var ProductMeta = class extends HTMLElement
         if (variant.compare_at_price > variant.price) {
             // Sale price display
             productPrices.innerHTML += `
-                <span class="price price--highlight `+this.priceClass+`" data-datora-classes="price price--highlight">
+                <span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight">
                     <span class="visually-hidden" data-datora-classes="price price--compare">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
@@ -4988,7 +4989,7 @@ var ProductMeta = class extends HTMLElement
         } else {
             // Regular price display (no sale)
             productPrices.innerHTML += `
-                <span class="price `+this.priceClass+`" data-datora-classes="price price--highlight">
+                <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
                     <span class="visually-hidden">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
