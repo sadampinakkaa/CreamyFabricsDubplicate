@@ -270,6 +270,7 @@ window.addEventListener('co2.codelink', async function(event){
       successTextElm.innerHTML = addSuccessText;
       successDiscountBar.classList.add('show');
       setTimeout(() => { successDiscountBar.classList.remove('show') }, 2500);
+      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     }
   }
 });
