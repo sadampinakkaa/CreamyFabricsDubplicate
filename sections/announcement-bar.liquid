@@ -37,6 +37,16 @@
       {%- endif -%}
     }
   }
+  #successDiscountBar{
+    position: absolute !important;
+    inset: 0 !important;
+    background:#F00;
+    transform:translateY(-100%);
+    transition:0.75s;
+  }
+  #successDiscountBar.show{
+    transform:translateY(0%);
+  }
 </style>
 
 {%- if section.blocks.size > 0 -%}
@@ -132,7 +142,7 @@
       {%- endif -%}
       
     </announcement-bar>
-    <div id="successDiscountBar" style="position: absolute !important;inset: 0 !important;background:#F00;"></div>
+    <div id="successDiscountBar" class=""></div>
   </section>
 
   <script>
