@@ -398,13 +398,14 @@
     <footer class="mini-cart__drawer-footer drawer__footer drawer__footer--tight drawer__footer--bordered">
       {%- capture shipping_tax_note -%}{{ 'cart.general.shipping_tax_note' | t }}{%- endcapture -%}
 
-      {%- if section.settings.show_datora_input -%}
-        <div class="datora-discount-field-container">
+      {%- if section.settings.datora_input_show -%}
+        <div class="datora-discount-field-container" 
+        data-error-empty="{{ section.settings.datora_error_empty }}" 
+        data-error-double="{{ section.settings.datora_error_double }}" 
+        data-error-failed="{{ section.settings.datora_error_failed }}" 
+        data-error-invalid="{{ section.settings.datora_error_invalid }}">
           <span class="datora-discount-error">
-            <span>
-              {% assign discount = cart.discounts | first %}
-              {{ 'Der Code <b>[CODE]</b> existiert nicht!' | replace:'[CODE]', discount.code }}
-            </span>
+            <span></span>
             <button 
               type="button" 
               class="datora-discount-error-close" 
@@ -708,11 +709,47 @@
       "default": "none"
     },
     {
+      "type": "header",
+      "content": "Datora | Discount CodeInput",
+      "info": "Section in the cart where you can enter or change a discount code. Part of [Datora | Multi Discounts](https:\/\/apps.shopify.com\/datora-multi-discounts)"
+    },
+    {
       "type": "checkbox",
-      "id": "show_datora_input",
-      "label": "Datora Discountcode",
+      "id": "datora_input_show",
+      "label": "Enable CodeInput",
       "default": false
-    }
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type":"text",
+      "id":"datora_error_empty",
+      "label":"Error | empty",
+      "default": "Trage bitte einen Code ein!"
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type":"text",
+      "id":"datora_error_double",
+      "label":"Error | double",
+      "default": "Der Code <b>[[CODE]]</b> ist bereits aktiv!",
+      "info": "[[CODE]] replaced by current discount code."
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type":"text",
+      "id":"datora_error_failed",
+      "label":"Error | failed",
+      "default": "Der Code <b>[[CODE]]</b> ist ungültig!",
+      "info": "[[CODE]] replaced by current discount code."
+    },
+    {
+      "visible_if": "{{ section.settings.datora_input_show }}",
+      "type":"text",
+      "id":"datora_error_invalid",
+      "label":"Error | invalid",
+      "default": "Der Code <b>[[CODE]]</b> existiert nicht!",
+      "info": "[[CODE]] replaced by current discount code."
+    },
   ],
    "blocks":[
         {
