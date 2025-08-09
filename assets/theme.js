@@ -5595,6 +5595,7 @@ var FreeShippingBar = class extends HTMLElement
   }
   _onCartUpdated(event)
   {
+    console.log("CART",event.detail.cart);
     const totalPrice = event.detail.cart.items.filter(item => item.requires_shipping).reduce((sum, item) => sum + item.final_line_price, 0);
     this.style.setProperty("--progress", Math.min(totalPrice / this.threshold, 1))
   }
