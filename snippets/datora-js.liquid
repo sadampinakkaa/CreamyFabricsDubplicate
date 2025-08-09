@@ -58,9 +58,9 @@ const applyDatoraDiscount = async function() {
 
 const removeDatoraDiscount = async function() {
   errorDatoraDiscount('hide');
-  const datoraCodeContainer = document.querySelector('.datora-discount-field-container');
+  const datoraContainer = document.querySelector('.datora-discount-field-container');
   if(datoraContainer) datoraContainer.classList.add('loading');
-  const datoraCodeApplied = datoraCodeContainer.querySelectorAll('.applied-discount');
+  const datoraCodeApplied = datoraContainer.querySelectorAll('.applied-discount');
   if (typeof co2 !== 'undefined' && typeof co2.removeDiscountCode === 'function') {
     datoraCodeApplied.forEach(element => {
       const buttonsInElement = element.querySelectorAll('button');
