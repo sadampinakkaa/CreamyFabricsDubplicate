@@ -139,7 +139,8 @@
           data-datora-pid="{{ product.id }}"
           data-datora-spgid="false"
           data-datora-tags="{{ product.tags | join:',' }}"
-          data-datora-price="{{ product.selected_or_first_available_variant.price }}">
+          data-datora-price="{{ product.selected_or_first_available_variant.price }}"
+          data-datora-compare="{{ product.selected_or_first_available_variant.compare_at_price }}">
             <div class="price-list" data-product-price-list>
               {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
                 <span class="price price--highlight">
