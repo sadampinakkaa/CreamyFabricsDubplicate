@@ -31,6 +31,8 @@ const applyDatoraDiscount = async function() {
         datoraContainer.classList.remove('error', 'loading');
       }
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+      const cleanCode = discountCode.trim().toUpperCase();
+      sessionStorage.setItem("lastDiscountCode",cleanCode);
     } else {
       if(datoraContainer){
         datoraContainer.classList.add('error');
