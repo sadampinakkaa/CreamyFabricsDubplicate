@@ -5,6 +5,11 @@ const priceFormatter = new Intl.NumberFormat('de-DE', {
   currency: 'EUR',
   currencyDisplay: 'symbol'
 });
+const formatPrice = function(price){
+  const formatted = priceFormatter.format(price);
+  const splitted = formatted.split(' ');
+  return splitted[1]+splitted[0];
+}
 Shopify.formatMoney = function(cents, format) {
   if (typeof cents == 'string') {
     cents = cents.replace('.', '');
@@ -187,14 +192,14 @@ async function updateProductGridDiscounts() {
           if (data.calc === "perc" && data.discPerc > 0) {
             validDisc = true;
             const discountedPrice = price - price * data.discPerc / 100;
-            newPrice = priceFormatter.format(discountedPrice / 100);
+            newPrice = formatPrice(discountedPrice / 100);
             const discountValue = price * data.discPerc / 100;
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
             badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           } else if (data.calc === "amt" && data.discAmt > 0) {
             validDisc = true;
             const discountedPrice = price - data.discAmt * 100;
-            newPrice = priceFormatter.format(discountedPrice / 100);
+            newPrice = formatPrice(discountedPrice / 100);
             const discountValue = price - discountedPrice;
             const formattedDiscountValue = priceFormatter.format(discountValue / 100);
             badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
