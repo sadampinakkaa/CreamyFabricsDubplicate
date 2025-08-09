@@ -30,13 +30,13 @@ const applyDatoraDiscount = async function() {
       if(datoraContainer) datoraContainer.classList.add('error');
       return;
     }
+    co2CheckCode = discountCode;
     const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
       const cleanCode = discountCode.trim().toUpperCase();
       sessionStorage.setItem("lastDiscountCode",cleanCode);
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
     } else {
-      co2CheckCode = discountCode;
       if(datoraContainer) datoraContainer.classList.add('error');
     }
     if(datoraContainer) datoraContainer.classList.remove('loading');
