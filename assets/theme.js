@@ -4970,7 +4970,7 @@ var ProductMeta = class extends HTMLElement
         if (variant.compare_at_price > variant.price) {
             // Sale price display
             productPrices.innerHTML += `
-                <span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight">
+                <span class="price price--highlight `+this.priceClass+`" data-datora-classes="price price--highlight">
                     <span class="visually-hidden" data-datora-classes="price price--compare">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
@@ -4988,7 +4988,7 @@ var ProductMeta = class extends HTMLElement
         } else {
             // Regular price display (no sale)
             productPrices.innerHTML += `
-                <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
+                <span class="price `+this.priceClass+`" data-datora-classes="price price--highlight">
                     <span class="visually-hidden">
                         ${window.themeVariables.strings.productSalePrice}
                     </span>
