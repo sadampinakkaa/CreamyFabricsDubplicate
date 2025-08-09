@@ -264,7 +264,7 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
       const cartContent = await (await fetch(`${window.themeVariables.routes.cartUrl}.js`, {cache: 'reload'})).json();
       console.log("cartContent", cartContent, cartContent.discount_codes, cartContent.discount_codes.length);
       if(cartContent && cartContent.discount_codes && cartContent.discount_codes.length >= 1){
-        if(cartContent.discount_codes[0].applicable){
+        if(cartContent.discount_codes[0]){
           const cartDiscount = cartContent.discount_codes[0].trim().toUpperCase();
           console.log("CHECK", cartDiscount, co2CheckApply, cartContent.discount_codes[0].applicable);
           if(cartDiscount == co2CheckApply && !cartContent.discount_codes[0].applicable){
