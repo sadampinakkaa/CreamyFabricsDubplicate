@@ -89,6 +89,7 @@ function setDatoraClasses(parentElem, fakeComparePrice) {
 function resetProductGridDiscount(div){
   div.classList.remove('discounted');
   const oldPrice = div.dataset.datoraPrice;
+  const oldCompare = div.dataset.datoraCompare;
   const basePriceFormatted = priceFormatter.format(oldPrice / 100);
   div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
   const datoraInfo = div.querySelector('[data-datora]');
@@ -109,15 +110,16 @@ async function updateProductGridDiscounts() {
     const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
       let validDisc = false;
       let newPrice, badgeText;
-      const [vid, pid, spgid, tags, price] = [
+      const [vid, pid, spgid, tags, price, compare] = [
         div.dataset.datoraVid,
         div.dataset.datoraPid,
         div.dataset.datoraSpgid,
         div.dataset.datoraTags,
-        div.dataset.datoraPrice
+        div.dataset.datoraPrice,
+        div.dataset.datoraCompare
       ];
 
-      console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price);
+      console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price, compare);
 
       if (!(vid && pid && price)) return;
 
