@@ -142,6 +142,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.dataset.src=
   {% render 'shogun-head' %}
 
   <script>
+    var Shopify = Shopify || {};
+    Shopify.money_format = "{{ shop.money_format }}";
     {%- render 'datora-js' -%}
   </script>
 
