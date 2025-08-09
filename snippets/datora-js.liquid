@@ -1,6 +1,7 @@
 let co2Initialized = false;
 let co2CartUpdate = false;
 let co2CheckApply = false;
+let co2CheckReverse = false;
 
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -26,6 +27,7 @@ const applyDatoraDiscount = async function() {
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
     co2CheckApply = discountCode.trim().toUpperCase();
     const getCurrentDiscountCode = await co2.getDiscountCode();
+    if(getCurrentDiscountCode){ co2CheckReverse = getCurrentDiscountCode; }
     if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
       if(datoraContainer) datoraContainer.classList.remove('loading');
       if(datoraContainer) datoraContainer.classList.add('error');
@@ -269,6 +271,11 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
           console.log("CHECK", cartDiscount, co2CheckApply, cartContent.discount_codes[0].applicable);
           if(cartDiscount && cartDiscount == co2CheckApply && !cartContent.discount_codes[0].applicable){
             console.log("co2CheckApply faild");
+            co2CheckApply = false;
+            if(co2CheckReverse){
+              await co2.setDiscountCode(co2CheckReverse);
+              co2CheckReverse = false;
+            }
           }
         }
       }
