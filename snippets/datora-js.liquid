@@ -94,8 +94,12 @@ function resetProductGridDiscount(div){
   if(oldCompareCheck > 0){
   
   }else{
-    div.querySelector('.price--highlight').classList.remove('price--highlight');
-    div.querySelector('.price--compare').classList.add('hidden');
+    if (div.querySelector('.price--highlight')){
+      div.querySelector('.price--highlight').classList.remove('price--highlight');
+    }
+    if (div.querySelector('.price--compare')){
+      div.querySelector('.price--compare').classList.add('hidden');
+    }
   }
   const basePriceFormatted = priceFormatter.format(oldPrice / 100);
   div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
