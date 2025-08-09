@@ -258,7 +258,7 @@ window.addEventListener('variant:changed', function(event){
 document.documentElement.addEventListener('cart:refresh', (result) => {
   const cartContent = (result && result.detail && result.detail.cart) ? result.detail.cart : false;
   console.log(result);
-  if(co2Initialized && co2CartUpdate){
+  if(co2Initialized && !co2CartUpdate){
     updateProductGridDiscounts();
     console.log("EventListener: cart:refresh");
     if(co2CheckApply && cartContent){
