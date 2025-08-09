@@ -185,11 +185,10 @@
 
           <span class="label label--highlight">{{ 'collection.product.discount_html' | t: savings: savings }}</span>
         {%- endunless -%}
-      <br />
-      <li hidden style="margin-left: 1rem;" class="datora discount-badge">
-         {%- render 'icon' with 'discount-badge' -%}
-         <span data-datora></span>
-      </li>
+        <discount-badge hidden style="margin-left: 10px;" class="datora discount-badge">
+          {%- render 'icon' with 'discount-badge' -%}
+          <span data-datora></span>
+        </discount-badge>
       </div>
     </div>
 
