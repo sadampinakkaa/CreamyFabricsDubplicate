@@ -125,12 +125,17 @@ async function updateProductGridDiscounts() {
       ];
       //console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price, compare);
       if (!(vid && pid && price)) return;
-      let priceClass = "";
+      let metaPriceClass = "";
+      let metaFormId = "";
       const productMeta = div.closest('product-meta');
       if(productMeta){
         const productMetaPriceClass = productMeta.getAttribute("price-class");
         if(productMetaPriceClass){
-          priceClass = productMetaPriceClass;
+          metaPriceClass = productMetaPriceClass;
+        }
+        const productMetaFormId = productMeta.getAttribute("form-id");
+        if(productMetaFormId){
+          metaFormId = productMetaFormId;
         }
       }
       try {
@@ -157,8 +162,11 @@ async function updateProductGridDiscounts() {
           if(validDisc){
             div.classList.add('discounted');
             div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = newPrice;
-            if(priceClass != ""){
-              div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').classList.add(priceClass);
+            if(metaPriceClass != ""){
+              div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').classList.add(metaPriceClass);
+            }
+            if(metaFormId && document.querySelector("product-sticky-form[form-id='"+metaFormId+"']"){
+              document.querySelector("product-sticky-form[form-id='"+metaFormId+"'] .product-sticky-form__price span:not(.visually-hidden)").textContent = newPrice;
             }
             const originalPriceAsComparePrice = priceFormatter.format(price / 100);
             setDatoraClasses(div, originalPriceAsComparePrice);
