@@ -137,6 +137,27 @@
   .datora.discount-badge svg {
 	display: inline-block;
   }
+
+  cart-drawer .datora-payments{
+	width: 100%;
+  }
+  cart-drawer .datora-payments ul{
+	width: 100%;
+    padding: 0 !important;
+    display: flex;
+    gap: 8px;
+    list-style-type: none;
+    justify-content: space-between;
+  }
+
+  cart-drawer .datora-payments ul li{
+	width: 100%;
+  }
+  cart-drawer .datora-payments ul li svg{
+	width: 100%;
+	height:auto;
+  }
+
   
   /* End Datora */
 
