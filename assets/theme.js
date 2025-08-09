@@ -5455,6 +5455,7 @@ var CartDrawer = class extends DrawerContent
     const co2CheckApply = ('co2CheckApply' in window) ? window.co2CheckApply : false;
     const co2CheckReverse = ('co2CheckReverse' in window) ? window.co2CheckReverse : false;
     console.log("appliedDiscounts", appliedDiscounts.length, window.co2CheckApply, window.co2CheckReverse);
+    if(appliedDiscounts.length == 0 && co2CheckApply && co2CheckReverse) return;
     setTimeout(async () =>
     {
       const previousPosition = this.querySelector(".drawer__content").scrollTop;
