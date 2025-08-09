@@ -46,22 +46,17 @@ const removeDatoraDiscount = async function() {
     let resultRemoveDiscountCode = await co2.removeDiscountCode();
     if(resultRemoveDiscountCode){
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
-
       const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                           document.querySelector('input[name="datora-discount"]');
       if (datoraInput) datoraInput.value = '';
-
       const datoraContainer = datoraInput?.closest('.datora-discount-field-container');
       if (datoraContainer) {
         datoraContainer.classList.remove('error', 'done', 'loading');
       }
-
       document.querySelectorAll('.discounted[data-datora-price]').forEach(div => {
         resetProductGridDiscount(div);
       });
-
       datoraCodeApplied[0].disabled = false;
-
     }else{ datoraCodeApplied[0].disabled = false; }
   }
 }
@@ -69,15 +64,12 @@ const removeDatoraDiscount = async function() {
 function setDatoraClasses(parentElem, fakeComparePrice) {
   parentElem.querySelectorAll('[data-datora-classes]').forEach(elem => {
     const newClasses = elem.dataset.datoraClasses;
-
     if(newClasses.length === 0) {
       return;
     }
-
     if(newClasses.includes('price--compare')) {
       elem.querySelector('span:not(.visually-hidden)').textContent = fakeComparePrice;
     }
-
     elem.setAttribute('class', newClasses);
   });
 }
@@ -95,9 +87,7 @@ function resetProductGridDiscount(div){
       priceClass = productMetaPriceClass;
     }
   }
-  if(oldCompareCheck > 0){
-  
-  }else{
+  if(oldCompareCheck == 0){
     if (div.querySelector('.price--highlight')){
       div.querySelector('.price--highlight').classList.remove('price--highlight');
     }
@@ -120,11 +110,8 @@ async function updateProductGridDiscounts() {
   if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
     return;
   }
-
   const getDiscountCode = await co2.getDiscountCode();
-  
   if(getDiscountCode){
-    // Verwenden Sie Promise.all statt forEach für async Operationen
     const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(async (div) => {
       let validDisc = false;
       let newPrice, badgeText;
@@ -136,11 +123,8 @@ async function updateProductGridDiscounts() {
         div.dataset.datoraPrice,
         div.dataset.datoraCompare
       ];
-
-      console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price, compare);
-
+      //console.log("updateProductGridDiscounts",vid, pid, spgid, tags, price, compare);
       if (!(vid && pid && price)) return;
-
       let priceClass = "";
       const productMeta = div.closest('product-meta');
       if(productMeta){
@@ -149,15 +133,12 @@ async function updateProductGridDiscounts() {
           priceClass = productMetaPriceClass;
         }
       }
-
       try {
-        console.log("updateProductGridDiscounts 2",Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
+        //console.log("updateProductGridDiscounts 2",Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
         const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
-        
         const basePriceFormatted = priceFormatter.format(price / 100);
-
         if(data){
-          console.log("Discount Data", data);
+          //console.log("Discount Data", data);
           if (data.calc === "perc" && data.discPerc > 0) {
             validDisc = true;
             const discountedPrice = price - price * data.discPerc / 100;
@@ -194,7 +175,6 @@ async function updateProductGridDiscounts() {
         console.error('Error processing discount:', error);
       }
     });
-    
     await Promise.all(promises);
   }
 }
