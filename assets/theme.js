@@ -4991,7 +4991,7 @@ var ProductMeta = class extends HTMLElement
             productPrices.innerHTML += `
                 <span class="hidden" data-datora-classes="price price--compare">
                     <span class="visually-hidden">
-                        ${window.themeVariables.strings.productSalePrice}
+                        ${window.themeVariables.strings.productRegularPrice}
                     </span>
                     <span></span>
                 </span>`;
