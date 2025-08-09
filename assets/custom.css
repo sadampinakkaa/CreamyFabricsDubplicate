@@ -79,6 +79,10 @@
   .datora-discount-field-container.error + .error-msg {
 	display: block;
   }
+
+  .datora-discount-field-container.loading :is(.applied-discount, .input__field, .datora-submit){
+	pointer-events: none;
+  }
   
   .datora-discount-field-container .datora-submit .loader-button__text {
 	z-index:1;
