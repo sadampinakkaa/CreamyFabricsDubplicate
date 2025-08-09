@@ -327,35 +327,35 @@
     {
       "type": "header",
       "content": "Discount",
-      "info": "Erfolgsmeldung, wenn man mit einem neuen Discountcode kommt."
+      "info": "Success message when entering the shop with a new discount code (discount link). Part of [Datora | Multi Discounts](https:\/\/apps.shopify.com\/datora-multi-discounts)"
     },
     {
       "type": "checkbox",
       "id": "discount_show",
-      "label": "Aktivieren",
+      "label": "Enable SuccessBar",
       "default": false
     },
     {
       "visible_if": "{{ section.settings.discount_show }}",
       "type": "color",
       "id": "discount_color_bg",
-      "label": "Farbe: Background",
+      "label": "Background",
       "default": "#f2fdf2"
     },
     {
       "visible_if": "{{ section.settings.discount_show }}",
       "type": "color",
       "id": "discount_color_text",
-      "label": "Farbe: Text",
+      "label": "Text",
       "default": "#007600"
     },
     {
       "visible_if": "{{ section.settings.discount_show }}",
       "type": "textarea",
       "id": "discount_text",
-      "label": "Erfolgsmeldung",
+      "label": "Success message",
       "default": "Der Code <b>[[CODE]]</b> wurde erfolgreich aktiviert!",
-      "info": "[[CODE]] im Text wird durch den aktuellen Discountcode ersetzt."
+      "info": "[[CODE]] in the text will be replaced by the current discount code."
     }
   ],
   "default": {
