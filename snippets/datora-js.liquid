@@ -90,6 +90,13 @@ function resetProductGridDiscount(div){
   div.classList.remove('discounted');
   const oldPrice = div.dataset.datoraPrice;
   const oldCompare = div.dataset.datoraCompare;
+  const oldCompareCheck = (oldCompare && oldCompare != "") ? parseInt(oldCompare) : 0;
+  if(oldCompareCheck > 0){
+  
+  }else{
+    div.querySelector('.price--highlight').classList.remove('price--highlight');
+    div.querySelector('.price--compare').classList.add('hidden');
+  }
   const basePriceFormatted = priceFormatter.format(oldPrice / 100);
   div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
   const datoraInfo = div.querySelector('[data-datora]');
