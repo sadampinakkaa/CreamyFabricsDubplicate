@@ -403,7 +403,7 @@
           <span class="datora-discount-error">
             <span>
               {% assign discount = cart.discounts | first %}
-              {{ 'Der Code [CODE] kann nicht eingelöst werden!' | replace:'[CODE]', discount.code }}
+              {{ 'Der Code <b>[CODE]</b> existiert nicht!' | replace:'[CODE]', discount.code }}
             </span>
             <button 
               type="button" 

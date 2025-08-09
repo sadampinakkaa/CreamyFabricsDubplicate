@@ -4,9 +4,9 @@ let co2CheckApply = false;
 let co2CheckReverse = false;
 const co2ErrorAlerts = {
   "empty": "Trage bitte einen Code ein!",
-  "double": "Der Code [CODE] ist bereits aktiv!",
-  "invalid": "Der Code [CODE] kann nicht eingelöst werden!",
-  "failed": "Der Code [CODE] ist ungültig!"
+  "double": "Der Code <b>[CODE]</b> ist bereits aktiv!",
+  "invalid": "Der Code <b>[CODE]</b> existiert nicht!",
+  "failed": "Der Code <b>[CODE]</b> ist ungültig!"
 };
 
 const priceFormatter = new Intl.NumberFormat('de-DE', {
@@ -105,6 +105,12 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
     errorAlert = errorAlert.replace("[CODE]",code);
     if(reason != "invalid"){
       if(datoraContainer) datoraContainer.classList.add('error');
+      if(reason != "empty"){
+        if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
+      }else if(reason != "double"){
+        if(datoraContainer) datoraContainer.querySelector('.datora-input input').value = '';
+        if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
+      }
     }else{
       if(cartDrawer) cartDrawer.classList.add('error');
     }
