@@ -5453,7 +5453,8 @@ var CartDrawer = class extends DrawerContent
     fakeDiv.innerHTML = html;
     const appliedDiscounts = fakeDiv.querySelectorAll('.applied-discount');
     const co2CheckApply = ('co2CheckApply' in window) ? window.co2CheckApply : false;
-    console.log("appliedDiscounts", appliedDiscounts.length, window.co2CheckApply);
+    const co2CheckReverse = ('co2CheckReverse' in window) ? window.co2CheckReverse : false;
+    console.log("appliedDiscounts", appliedDiscounts.length, window.co2CheckApply, window.co2CheckReverse);
     setTimeout(async () =>
     {
       const previousPosition = this.querySelector(".drawer__content").scrollTop;
