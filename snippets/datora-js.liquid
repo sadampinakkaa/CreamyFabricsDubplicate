@@ -256,13 +256,13 @@ window.addEventListener('variant:changed', function(event){
 });
 
 document.documentElement.addEventListener('cart:refresh', async (result) => {
-  const cartResult = await (await fetch(`${window.themeVariables.routes.cartUrl}.js`, {cache: 'reload'})).json();
-  const cartContent = (result && result.detail && result.detail.cart) ? result.detail.cart : false;
-  console.log(result, cartResult);
+  console.log(result);
   if(co2Initialized){
     updateProductGridDiscounts();
-    console.log("EventListener: cart:refresh", co2CheckApply, cartContent);
-    if(co2CheckApply && cartContent){
+    console.log("EventListener: cart:refresh", co2CheckApply);
+    if(co2CheckApply){
+      const cartResult = await (await fetch(`${window.themeVariables.routes.cartUrl}.js`, {cache: 'reload'})).json();
+      const cartContent = (cartResult && cartResult.detail && cartResult.detail.cart) ? cartResult.detail.cart : false;
       if(cartContent.discount_codes && cartContent.discount_codes.length >= 1){
         if(cartContent.discount_codes[0].applicable){
           const cartDiscount = cartContent.discount_codes[0].trim().toUpperCase();
