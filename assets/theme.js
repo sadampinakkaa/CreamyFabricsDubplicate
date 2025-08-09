@@ -5450,6 +5450,8 @@ var CartDrawer = class extends DrawerContent
     
     event.detail && event.detail.cart && event.detail.cart.sections ? (cartContent = event.detail.cart, html = event.detail.cart.sections["mini-cart"]) : html = await (await fetch(`${window.themeVariables.routes.cartUrl}?section_id=${this.getAttribute("section")}`)).text();
     const fakeDiv = document.createElement("div");
+    const appliedDiscounts = html.querySelectorAll('.applied-discount');
+    console.log("appliedDiscounts", appliedDiscounts.length);
     fakeDiv.innerHTML = html, setTimeout(async () =>
     {
       const previousPosition = this.querySelector(".drawer__content").scrollTop;
