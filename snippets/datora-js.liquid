@@ -3,6 +3,7 @@ let co2CartUpdate = false;
 let co2CheckApply = false;
 let co2CheckReverse = false;
 const co2ErrorAlerts = {
+  "empty": "Trage bitte einen Code ein!",
   "double": "Der Code [CODE] ist bereits aktiv!",
   "invalid": "Der Code [CODE] kann nicht eingelöst werden!",
   "failed": "Der Code [CODE] ist ungültig!"
@@ -25,7 +26,10 @@ const applyDatoraDiscount = async function() {
                      document.querySelector('input[name="datora-discount"]');
   if(!datoraInput) return;
   const discountCode = datoraInput.value.trim();
-  if(discountCode.length < 1) return;
+  if(discountCode.length < 1){
+    errorDatoraDiscount('show', 'empty');
+    return;
+  }
   const datoraContainer = datoraInput.closest('.datora-discount-field-container');
   if(datoraContainer) datoraContainer.classList.remove('error');
   if(datoraContainer) datoraContainer.classList.add('loading');
@@ -95,18 +99,16 @@ function setDatoraClasses(parentElem, fakeComparePrice) {
   });
 }
 
-function errorDatoraDiscount(type = 'show', reason = 'failed', code = '') {
+function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
   const cartDrawer = document.querySelector('cart-drawer');
   const datoraContainer = document.querySelector('.datora-discount-field-container');
   if(type == "show"){
     let errorAlert = co2ErrorAlerts[reason] ?? "ERROR";
     errorAlert = errorAlert.replace("[CODE]",code);
-    if(reason == "double"){
+    if(reason != "invalid"){
       if(datoraContainer) datoraContainer.classList.add('error');
-    }else if(reason == "invalid"){
-      if(cartDrawer) cartDrawer.classList.add('error');
     }else{
-      if(datoraContainer) datoraContainer.classList.add('error');
+      if(cartDrawer) cartDrawer.classList.add('error');
     }
     if(datoraContainer) datoraContainer.querySelector('.datora-discount-error span').innerHTML = errorAlert;
   }else{

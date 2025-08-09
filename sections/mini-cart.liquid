@@ -401,7 +401,10 @@
       {%- if section.settings.show_datora_input -%}
         <div class="datora-discount-field-container">
           <span class="datora-discount-error">
-            <span>Der Code ist ungültig.</span>
+            <span>
+              {% assign discount = cart.discount_codes | first %}
+              {{ 'Der Code [CODE] kann nicht eingelöst werden!' | replace:'[CODE]', discount.code }}
+            </span>
             <button 
               type="button" 
               class="datora-discount-error-close" 
