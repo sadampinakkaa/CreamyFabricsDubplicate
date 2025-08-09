@@ -494,6 +494,8 @@
             {% assign free_addon_title = "Umtausch" %}
           {%- elsif section.settings.show_free_addon == 'shipping' -%}
             {% assign free_addon_title = "Versand" %}
+          {%- elsif section.settings.show_free_addon == 'custom' -%}
+            {% assign free_addon_title = section.settings.show_free_custom %}
           {%- endif -%}
           {%- if free_addon_title -%}
             <div class="checkout-subtotal-btn">
@@ -698,6 +700,11 @@
       "content": "AddOns"
     },
     {
+      "type": "header",
+      "content": "Datora | AddOns",
+      "info": "Some features for easier maintenance. Made by [Datora | Shopify Plus Agency](https:\/\/datora.de)"
+    },
+    {
       "type": "select",
       "id": "show_free_addon",
       "label": "Free Component",
@@ -708,14 +715,25 @@
         },
         {
           "value": "return",
-          "label": "Umtausch"
+          "label": "Return"
         },
         {
           "value": "shipping",
-          "label": "Versand"
+          "label": "Shipping"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
         }
       ],
       "default": "none"
+    },
+    {
+      "visible_if": "{{ section.settings.show_free_addon == 'custom' }}",
+      "type": "text",
+      "id": "show_free_custom",
+      "label": "Custom Component",
+      "default": "Custom text"
     },
     {
       "type": "header",
