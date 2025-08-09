@@ -551,7 +551,7 @@
 
       <div class="dgs-block-payments">
         <ul>
-          {% assign payment_types = localization.market.metafields.ngt.payment_gateways.value %}
+          {% assign payment_types = section.settings.payment_icons %}
           {%- for type in payment_types -%}
             <li>
               {% comment %}
