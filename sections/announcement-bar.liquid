@@ -47,6 +47,8 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    line-height: normal;
+    gap:5px;
   }
   #successDiscountBar.show{
     transform:translateY(0%);
@@ -314,6 +316,39 @@
       "id": "button_text_color",
       "label": "Button text",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Discount",
+      "info": "Erfolgsmeldung, wenn man mit einem neuen Discountcode kommt."
+    },
+    {
+      "type": "checkbox",
+      "id": "discount_show",
+      "label": "Aktivieren",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.discount_show }}",
+      "type": "color",
+      "id": "discount_color_bg",
+      "label": "Farbe: Background",
+      "default": "#f2fdf2"
+    },
+    {
+      "visible_if": "{{ section.settings.discount_show }}",
+      "type": "color",
+      "id": "discount_color_text",
+      "label": "Farbe: Text",
+      "default": "#007600"
+    },
+    {
+      "visible_if": "{{ section.settings.discount_show }}",
+      "type": "textarea",
+      "id": "discount_text",
+      "label": "Erfolgsmeldung",
+      "default": "Der Code <b>[[CODE]]</b> wurde erfolgreich aktiviert!",
+      "info": "[[CODE]] im Text wird durch den aktuellen Discountcode ersetzt."
     }
   ],
   "default": {
