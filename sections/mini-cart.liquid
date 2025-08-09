@@ -402,7 +402,12 @@
         <div class="datora-discount-field-container">
           <span class="datora-discount-error">
             <span>Der Code ist ungültig.</span>
-            <button type="button" class="datora-discount-error-close" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">
+            <button 
+              type="button" 
+              class="datora-discount-error-close" 
+              data-action="close" 
+              title="{{ 'general.accessibility.close' | t | escape }}"
+              onclick="document.querySelector('.datora-discount-field-container').classList.remove('error');">
               {%- render 'icon' with 'close' -%}
             </button>
           </span>
