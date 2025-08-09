@@ -128,11 +128,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.dataset.src=
   
   {% render 'vital-scripts' %}
 
-  {%- comment %}
+ 
     {{ content_for_header }}
-  {%- endcomment -%}
+ {%- comment %}
   {{ content_for_header | replace: '"https:\/\/d9fvwtvqz2fm1.cloudfront.net\/shop\/js\/discount-on-cart-pro.min.js?shop=d9af6a-2.myshopify.com",', '' }}
-
+  {%- endcomment -%}
 
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
   <script src="{{ 'vendor.js' | asset_url }}" defer></script>
