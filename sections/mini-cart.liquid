@@ -416,7 +416,13 @@
           </span>
           <div class="datora-discount-field-input">
             <div class="input datora-input">
-              <input type="text" name="datora-discount" id="datora-discount-input" class="input__field input__field--text">
+              <input 
+                type="text" 
+                name="datora-discount" 
+                id="datora-discount-input" 
+                class="input__field input__field--text"
+                pattern="[a-zA-Z0-9]*"
+                oninput="errorDatoraDiscount('hide');">
               <label for="datora-discount" class="input__label">{{ 'shopify.checkout.order_summary.discount_label' | t }}</label>
             </div>
             <button type="button" is="loader-button" onclick="applyDatoraDiscount()" class="datora-submit button button--primary">{{ 'shopify.checkout.general.submit' | t }}</button>
