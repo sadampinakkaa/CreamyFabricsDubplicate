@@ -156,6 +156,7 @@ async function updateProductGridDiscounts() {
         const basePriceFormatted = priceFormatter.format(price / 100);
 
         if(data){
+          console.log("Discount Data", data);
           if (data.calc === "perc" && data.discPerc > 0) {
             validDisc = true;
             const discountedPrice = price - price * data.discPerc / 100;
