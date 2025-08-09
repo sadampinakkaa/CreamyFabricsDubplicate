@@ -121,10 +121,15 @@
 	position: absolute;
 	right:0;
 	top:0;
+	height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .datora-discount-field-container .datora-discount-error button svg{
-	width:12px;
-	height:12px;
+	width:14px;
+	height:14px;
   }
   
   .datora.discount-badge {
