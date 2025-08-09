@@ -273,7 +273,12 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
             console.log("co2CheckApply faild");
             co2CheckApply = false;
             if(co2CheckReverse){
-              await co2.setDiscountCode(co2CheckReverse);
+              const resultChangeDiscountCode = await co2.setDiscountCode(co2CheckReverse);
+              if(resultChangeDiscountCode){
+                const cleanCode = co2CheckReverse.trim().toUpperCase();
+                sessionStorage.setItem("lastDiscountCode",cleanCode);
+                document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+              }
               co2CheckReverse = false;
             }
           }
