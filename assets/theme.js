@@ -4963,21 +4963,67 @@ var ProductMeta = class extends HTMLElement
       if (!variant) productPrices.style.display = "none";
       else
       {
-        if (productPrices.innerHTML = "", variant.compare_at_price > variant.price ? (productPrices.innerHTML += `<span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight"><span class="visually-hidden" data-datora-classes="price price--compare">${window.themeVariables.strings.productSalePrice}</span>${formatMoney(variant.price,currencyFormat)}</span>`, productPrices.innerHTML += `<span class="price price--compare" data-datora-classes="price price--compare"><span class="visually-hidden">${window.themeVariables.strings.productRegularPrice}</span>${formatMoney(variant.compare_at_price,currencyFormat)}</span>`) : productPrices.innerHTML += `<span class="price ${this.priceClass}" data-datora-classes="price price--highlight"><span class="visually-hidden">${window.themeVariables.strings.productSalePrice}</span>${formatMoney(variant.price,currencyFormat)}</span>`, variant.unit_price_measurement)
-        {
-          let referenceValue = "";
-          variant.unit_price_measurement.reference_value !== 1 && (referenceValue = `<span class="unit-price-measurement__reference-value">${variant.unit_price_measurement.reference_value}</span>`), productPrices.innerHTML += `
-          <div class="price text--subdued ${this.unitPriceClass}">
-            <div class="unit-price-measurement">
-              <span class="unit-price-measurement__price">${formatMoney(variant.unit_price)}</span>
-              <span class="unit-price-measurement__separator">/</span>
-              ${referenceValue}
-              <span class="unit-price-measurement__reference-unit">${variant.unit_price_measurement.reference_unit}</span>
-            </div>
-          </div>
-        `
+        // Clear existing price content
+        productPrices.innerHTML = "";
+
+        // Check if there's a sale (compare_at_price is higher than current price)
+        if (variant.compare_at_price > variant.price) {
+            // Sale price display
+            productPrices.innerHTML += `
+                <span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight">
+                    <span class="visually-hidden" data-datora-classes="price price--compare">
+                        ${window.themeVariables.strings.productSalePrice}
+                    </span>
+                    ${formatMoney(variant.price, currencyFormat)}
+                </span>`;
+            
+            // Original price (crossed out)
+            productPrices.innerHTML += `
+                <span class="price price--compare" data-datora-classes="price price--compare">
+                    <span class="visually-hidden">
+                        ${window.themeVariables.strings.productRegularPrice}
+                    </span>
+                    <span>${formatMoney(variant.compare_at_price, currencyFormat)}</span>
+                </span>`;
+        } else {
+            // Regular price display (no sale)
+            productPrices.innerHTML += `
+                <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
+                    <span class="visually-hidden">
+                        ${window.themeVariables.strings.productSalePrice}
+                    </span>
+                    ${formatMoney(variant.price, currencyFormat)}
+                </span>`;
+              // Original price (crossed out)
+            productPrices.innerHTML += `
+                <span class="hidden" data-datora-classes="price price--compare">
+                    <span class="visually-hidden">
+                        ${window.themeVariables.strings.productSalePrice}
+                    </span>
+                    <span></span>
+                </span>`;
         }
-        productPrices.style.display = ""
+
+        // Add unit price measurement if available
+        if (variant.unit_price_measurement) {
+            let referenceValue = "";
+            
+            // Only show reference value if it's not 1 (e.g., "per 100g" vs "per g")
+            if (variant.unit_price_measurement.reference_value !== 1) {
+                referenceValue = `<span class="unit-price-measurement__reference-value">${variant.unit_price_measurement.reference_value}</span>`;
+            }
+            
+            // Add unit price display (e.g., "$5.99 / 100g")
+            productPrices.innerHTML += `
+                <div class="price text--subdued ${this.unitPriceClass}">
+                    <div class="unit-price-measurement">
+                        <span class="unit-price-measurement__price">${formatMoney(variant.unit_price)}</span>
+                        <span class="unit-price-measurement__separator">/</span>
+                        ${referenceValue}
+                        <span class="unit-price-measurement__reference-unit">${variant.unit_price_measurement.reference_unit}</span>
+                    </div>
+                </div>`;
+        }
       }
   }
   _updateSku(variant)
