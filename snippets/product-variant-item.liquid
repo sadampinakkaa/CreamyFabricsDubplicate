@@ -92,8 +92,9 @@
           data-datora-vid="{{ variant.id }}"
           data-datora-pid="{{ product.id }}"
           data-datora-spgid="false"
-          data-datora-tags="{{ product.tags }}"
+          data-datora-tags="{{ product.tags | join:',' }}"
           data-datora-price="{{ variant.price }}"
+          data-datora-compare="{{ variant.compare_at_price }}"
           >
         <div class="price-list price-list--centered">
         
