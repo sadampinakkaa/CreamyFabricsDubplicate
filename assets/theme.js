@@ -5453,9 +5453,9 @@ var CartDrawer = class extends DrawerContent
     fakeDiv.innerHTML = html;
     const currentCartDrawer = document.querySelector('cart-drawer');
     const appliedDiscounts = fakeDiv.querySelectorAll('.applied-discount');
-    const co2CheckApply = ('co2CheckApply' in window && !window.co2CheckApply) ? window.co2CheckApply : false;
-    const co2CheckReverse = ('co2CheckReverse' in window && !window.co2CheckReverse) ? window.co2CheckReverse : false;
-    const co2ErrorAlert = ('co2ErrorAlert' in window && !window.co2ErrorAlert) ? window.co2ErrorAlert : false;
+    const co2CheckApply = ('co2CheckApply' in window) ? window.co2CheckApply : false;
+    const co2CheckReverse = ('co2CheckReverse' in window) ? window.co2CheckReverse : false;
+    const co2ErrorAlert = ('co2ErrorAlert' in window) ? window.co2ErrorAlert : false;
     console.log("appliedDiscounts", appliedDiscounts.length, window.co2CheckApply, window.co2CheckReverse);
     if(appliedDiscounts.length == 0 && co2CheckApply && co2CheckReverse) return;
     if(appliedDiscounts.length > 0 && co2CheckApply && co2CheckReverse) window.co2CheckApply = window.co2CheckReverse = false;
