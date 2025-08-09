@@ -49,6 +49,7 @@
     justify-content:center;
     line-height: normal;
     gap:5px;
+    border-bottom:1px var(--sdb-border) solid;
   }
   #successDiscountBar.show{
     transform:translateY(0%);
@@ -151,7 +152,9 @@
     </announcement-bar>
     {%- if section.settings.discount_show != blank -%}
       <div id="successDiscountBar" class="{{ text_size_class }}" 
-        style="--sdb-bg:{{ section.settings.discount_color_bg | default:'#080' }};--sdb-text:{{ section.settings.discount_color_text | default:'#FFF' }};">
+        style="--sdb-bg:{{ section.settings.discount_color_bg | default:'#080' }};
+        --sdb-text:{{ section.settings.discount_color_text | default:'#FFF' }};
+        --sdb-border:{{ section.settings.discount_color_text | color_lighten: 50 }};">
         <svg
             height="14px"
             width="14px"
