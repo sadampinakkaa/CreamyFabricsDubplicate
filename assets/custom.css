@@ -106,17 +106,25 @@
   .datora-discount-field-container .datora-discount-error{
 	align-items: center;
     border: 1px solid #f5c6cb;
-    border-radius: 5px;
     box-sizing: border-box;
     display: flex;
     font-size: 13px;
     line-height: 1.3em;
     margin: 0 0 10px 0;
-    padding: 4px 20px 4px 4px;
+    padding: 8px 32px 8px 8px;
     position: relative;
     width: 100%;
   	background-color: #f8d7da;
     color: #721c24;
+  }
+  .datora-discount-field-container .datora-discount-error button{
+	position: absolute;
+	right:0;
+	top:0;
+  }
+  .datora-discount-field-container .datora-discount-error button svg{
+	width:12px;
+	height:12px;
   }
   
   .datora.discount-badge {
