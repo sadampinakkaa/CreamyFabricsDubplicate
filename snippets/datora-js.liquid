@@ -280,6 +280,10 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
             console.log("co2CheckApply faild");
             co2CheckApply = false;
             co2CheckError = true;
+            const datoraContainer = document.querySelector('.datora-discount-field-container');
+            if(datoraContainer){
+              datoraContainer.classList.add('error');
+            }
             if(co2CheckReverse){
               const resultChangeDiscountCode = await co2.setDiscountCode(co2CheckReverse);
               if(resultChangeDiscountCode){
