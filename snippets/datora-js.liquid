@@ -106,7 +106,8 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
   const cartDrawer = document.querySelector('cart-drawer');
   const datoraContainer = document.querySelector('.datora-discount-field-container');
   if(type == "show"){
-    let errorAlert = co2ErrorAlerts[reason] ?? "ERROR";
+    let errorAlert = window.datoraErrors[reason] ?? false;
+    if(!errorAlert) return;
     const cleanCode = code.trim().toUpperCase();
     errorAlert = errorAlert.replace("[[CODE]]",cleanCode);
     if(reason != "invalid"){
