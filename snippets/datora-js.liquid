@@ -33,6 +33,7 @@ const applyDatoraDiscount = async function() {
     co2CheckCode = discountCode;
     const resultChangeDiscountCode = await co2.setDiscountCode(discountCode);
     if(resultChangeDiscountCode){
+      co2CheckCode = false;
       const cleanCode = discountCode.trim().toUpperCase();
       sessionStorage.setItem("lastDiscountCode",cleanCode);
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
