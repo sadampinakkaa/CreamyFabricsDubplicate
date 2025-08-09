@@ -73,6 +73,7 @@ const removeDatoraDiscount = async function() {
     let resultRemoveDiscountCode = await co2.removeDiscountCode();
     if(resultRemoveDiscountCode){
       sessionStorage.removeItem("lastDiscountCode");
+      window.co2CheckApply = window.co2CheckReverse = false;
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
       const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                           document.querySelector('input[name="datora-discount"]');
