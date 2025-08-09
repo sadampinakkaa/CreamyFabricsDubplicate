@@ -1,5 +1,5 @@
 
-window.co2CheckApply = window.co2CheckReverse = false;
+window.co2CheckApply = window.co2CheckReverse = window.co2ErrorAlert = false;
 let co2Initialized = false;
 let co2CartUpdate = false;
 let co2CheckApply = false;
@@ -117,6 +117,7 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
       }
     }else{
       if(cartDrawer) cartDrawer.classList.add('error');
+      window.co2ErrorAlert = errorAlert;
     }
     if(datoraContainer) datoraContainer.querySelector('.datora-discount-error span').innerHTML = errorAlert;
   }else{
