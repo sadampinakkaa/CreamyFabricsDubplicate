@@ -167,12 +167,10 @@ function updateProductGridDiscounts() {
   if (typeof co2 === 'undefined' || typeof co2.getDiscountCode !== 'function') {
     return Promise.resolve();
   }
-  
   return co2.getDiscountCode().then(getDiscountCode => {
     if (!getDiscountCode) {
       return Promise.resolve();
     }
-    
     const promises = Array.from(document.querySelectorAll('[data-datora-pid]')).map(div => {
       let validDisc = false;
       let newPrice, badgeText;
@@ -184,9 +182,7 @@ function updateProductGridDiscounts() {
         div.dataset.datoraPrice,
         div.dataset.datoraCompare
       ];
-      
       if (!(vid && pid && price)) return Promise.resolve();
-      
       let metaPriceClass = "";
       let metaFormId = "";
       const productMeta = div.closest('product-meta');
@@ -200,7 +196,6 @@ function updateProductGridDiscounts() {
           metaFormId = productMetaFormId;
         }
       }
-      
       return co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid)
         .then(data => {
           const basePriceFormatted = formatPrice(price / 100);
@@ -211,7 +206,8 @@ function updateProductGridDiscounts() {
               newPrice = formatPrice(discountedPrice / 100);
               const discountValue = price * data.discPerc / 100;
               const formattedDiscountValue = formatPrice(discountValue / 100);
-              badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+              //badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
+              badgeText = `-${data.discPerc}% | ${getDiscountCode.toUpperCase()}`;
             } else if (data.calc === "amt" && data.discAmt > 0) {
               validDisc = true;
               const discountedPrice = price - data.discAmt * 100;
@@ -245,7 +241,6 @@ function updateProductGridDiscounts() {
           console.error('Error processing discount:', error);
         });
     });
-    
     return Promise.all(promises);
   });
 }
