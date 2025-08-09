@@ -38,7 +38,7 @@
         "text_color": "#ffffff",
         "button_background": "#ffffff",
         "button_text_color": "#282828",
-        "discount_show": false,
+        "discount_show": true,
         "discount_color_bg": "#f2fdf2",
         "discount_color_text": "#007600",
         "discount_text": "Der Code <b>[[CODE]]</b> wurde erfolgreich aktiviert!"
