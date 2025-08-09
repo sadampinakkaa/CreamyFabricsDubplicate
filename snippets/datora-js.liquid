@@ -255,7 +255,7 @@ window.addEventListener('variant:changed', function(event){
   console.log("EventListener: variant:changed");
 });
 
-document.documentElement.addEventListener('cart:refresh', (result) => {
+document.documentElement.addEventListener('cart:refresh', async (result) => {
   const cartContent = (result && result.detail && result.detail.cart) ? result.detail.cart : false;
   console.log(result);
   if(co2Initialized){
