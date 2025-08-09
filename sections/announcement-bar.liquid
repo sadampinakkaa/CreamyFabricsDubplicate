@@ -40,8 +40,8 @@
   #successDiscountBar{
     position: absolute !important;
     inset: 0 !important;
-    background:#f2fdf2;
-    color:#007600;
+    background:var(--sdb-bg);
+    color:var(--sdb-text);
     transform:translateY(-100%);
     transition:0.75s;
     display:flex;
@@ -148,23 +148,26 @@
       {%- endif -%}
       
     </announcement-bar>
-    <div id="successDiscountBar" class="">
-      <svg
-          height="14px"
-          width="14px"
-          version="1.1"
-          id="Capa_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 310.277 310.277"
-          xml:space="preserve"
-          fill="#007600"
-          stroke="#007600"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:##007600;" d="M155.139,0C69.598,0,0,69.598,0,155.139c0,85.547,69.598,155.139,155.139,155.139 c85.547,0,155.139-69.592,155.139-155.139C310.277,69.598,240.686,0,155.139,0z M144.177,196.567L90.571,142.96l8.437-8.437 l45.169,45.169l81.34-81.34l8.437,8.437L144.177,196.567z"></path> </g> </g>
-        </svg>
-      <span data-text="Der Code <b>[[CODE]]</b> wurde erfolgreich aktiviert!"></span>
-    </div>
+    {%- if section.settings.discount_show != blank -%}
+      <div id="successDiscountBar" class="" 
+        style="--sdb-bg:{{ section.settings.discount_color_bg | default:'#080' }};--sdb-bg:{{ section.settings.discount_color_text | default:'#FFF' }};">
+        <svg
+            height="14px"
+            width="14px"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 310.277 310.277"
+            xml:space="preserve"
+            fill="currentColor"
+            stroke="currentColor"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:##007600;" d="M155.139,0C69.598,0,0,69.598,0,155.139c0,85.547,69.598,155.139,155.139,155.139 c85.547,0,155.139-69.592,155.139-155.139C310.277,69.598,240.686,0,155.139,0z M144.177,196.567L90.571,142.96l8.437-8.437 l45.169,45.169l81.34-81.34l8.437,8.437L144.177,196.567z"></path> </g> </g>
+          </svg>
+        <span data-text="{{ section.settings.discount_text | default:'Code [[CODE]] activated!' }}"></span>
+      </div>
+    {%- endif -%}
   </section>
 
   <script>
