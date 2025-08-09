@@ -554,9 +554,7 @@
           {% assign payment_types = section.settings.payment_icons | newline_to_br | split: '<br />' %}
           {%- for type in payment_types -%}
             <li data-payment="{{ type }}">
-              {% comment %}
-                <img src="{{ type | payment_type_img_url }}" width="46" height="" class="icon icon--full-color" alt="{{ type }}">
-              {% endcomment %}
+              {% assign type = type | strip | strip_html | strip_newlines %}
               {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
             </li>
           {% endfor %}
