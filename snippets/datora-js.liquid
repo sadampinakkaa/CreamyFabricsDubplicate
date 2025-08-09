@@ -266,7 +266,7 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
     if(co2CheckError){
       const datoraContainer = document.querySelector('.datora-discount-field-container');
       if(datoraContainer){
-        datoraContainer.classList.add('error');
+        //datoraContainer.classList.add('error');
         co2CheckError = false;
       }
     }else if(co2CheckApply){
@@ -282,7 +282,7 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
             co2CheckError = true;
             const datoraContainer = document.querySelector('.datora-discount-field-container');
             if(datoraContainer){
-              datoraContainer.classList.add('error');
+              //datoraContainer.classList.add('error');
             }
             if(co2CheckReverse){
               const resultChangeDiscountCode = await co2.setDiscountCode(co2CheckReverse);
