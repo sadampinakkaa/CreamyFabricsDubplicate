@@ -266,10 +266,8 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
     if(co2CheckError){
       const datoraContainer = document.querySelector('.datora-discount-field-container');
       if(datoraContainer){
-        setTimeout(() => {
-          datoraContainer.classList.add('error');
-          //co2CheckError = false;
-        }, 500);
+        datoraContainer.classList.add('error');
+        co2CheckError = false;
       }
     }else if(co2CheckApply){
       const cartContent = await (await fetch(`${window.themeVariables.routes.cartUrl}.js`, {cache: 'reload'})).json();
