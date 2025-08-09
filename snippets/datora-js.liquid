@@ -217,8 +217,8 @@ async function checkDiscountCode() {
 
 window.addEventListener('co2.cart.initialized', function() {
   if(!co2Initialized){
-    checkDiscountCode();
     updateProductGridDiscounts();
+    checkDiscountCode();
     console.log("EventListener: co2.cart.initialized");
     co2Initialized = true;
   }
