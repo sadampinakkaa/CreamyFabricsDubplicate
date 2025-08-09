@@ -80,28 +80,24 @@
 	display: block;
   }
   
-  .datora-discount-field-container:not(.done) .line-item__loader-mark {
+  .datora-discount-field-container .datora-submit .loader-button__text {
+	z-index:1;
+  }
+  .datora-discount-field-container.loading .datora-submit .loader-button__text {
 	opacity: 0;
 	visibility: hidden;
   }
-  
-  .datora-discount-field-container.loading .line-item__loader-mark,
-  .datora-discount-field-container.done .line-item__loader-spinner.spinner {
-	display: none;
+
+  .datora-discount-field-container .datora-submit .loader-button__loader{
+	inset: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+	pointer-events: none;
+	z-index:0;
   }
-  
-  .datora-discount-field-container:not(.loading) .line-item__loader-spinner.spinner {
-	opacity: 0;
-	visibility: hidden;
-  }
-  
-  .datora-discount-field-container.loading .datora-submit__text {
-	opacity: 0;
-  }
-  
-  .datora-discount-field-container:not(.done) .datora-submit__spinner {
-	background: none !important;
-	color: white !important;
+  .datora-discount-field-container.loading .datora-submit .loader-button__loader{
+	opacity: 1;
   }
   
   .datora.discount-badge {
