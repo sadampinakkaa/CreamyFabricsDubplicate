@@ -5471,7 +5471,7 @@ var CartDrawer = class extends DrawerContent
         transform: ["translateY(40px)", "translateY(0)"]
       },
       {
-        duration: 250,
+        duration: 450,
         easing: "cubic-bezier(0.33, 1, 0.68, 1)"
       }) : this.querySelector(".drawer__content").scrollTop = previousPosition, event?.detail?.openMiniCart && (this.clientWidth, this.open = !0)
     }, event?.detail?.replacementDelay || this.nextReplacementDelay), this.nextReplacementDelay = 0
