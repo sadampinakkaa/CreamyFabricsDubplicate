@@ -5447,6 +5447,7 @@ var CartDrawer = class extends DrawerContent
   {
     let cartContent = null,
       html = "";
+    console.log("CART",event.detail.cart);
     event.detail && event.detail.cart && event.detail.cart.sections ? (cartContent = event.detail.cart, html = event.detail.cart.sections["mini-cart"]) : html = await (await fetch(`${window.themeVariables.routes.cartUrl}?section_id=${this.getAttribute("section")}`)).text();
     const fakeDiv = document.createElement("div");
     fakeDiv.innerHTML = html, setTimeout(async () =>
