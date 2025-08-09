@@ -405,7 +405,7 @@
               <input type="text" name="datora-discount" id="datora-discount-input" class="input__field input__field--text">
               <label for="datora-discount" class="input__label">{{ 'shopify.checkout.order_summary.discount_label' | t }}</label>
             </div>
-            <button type="button" onclick="applyDatoraDiscount()" class="datora-submit button button--primary">{{ 'shopify.checkout.general.submit' | t }}</button>
+            <button type="button" is="loader-button" onclick="applyDatoraDiscount()" class="datora-submit button button--primary">{{ 'shopify.checkout.general.submit' | t }}</button>
           </div>
           {%- if cart.cart_level_discount_applications != blank -%}
             <div class="applied-discounts-wrapper">
