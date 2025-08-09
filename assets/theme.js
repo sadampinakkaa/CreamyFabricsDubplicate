@@ -4964,15 +4964,15 @@ var ProductMeta = class extends HTMLElement
       if (!variant) productPrices.style.display = "none";
       else
       {
-        // Clear existing price content
         productPrices.innerHTML = "";
-
-        // Check if there's a sale (compare_at_price is higher than current price)
         if (variant.compare_at_price > variant.price) {
-            // Sale price display
-            productPrices.innerHTML += '<span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight"><span class="visually-hidden" data-datora-classes="price price--compare">${window.themeVariables.strings.productSalePrice}</span>${formatMoney(variant.price, currencyFormat)}</span>';
-            
-            // Original price (crossed out)
+            productPrices.innerHTML += `
+                <span class="price price--highlight ${this.priceClass}" data-datora-classes="price price--highlight">
+                    <span class="visually-hidden">
+                        ${window.themeVariables.strings.productSalePrice}
+                    </span>
+                    ${formatMoney(variant.price, currencyFormat)}
+                </span>`;
             productPrices.innerHTML += `
                 <span class="price price--compare" data-datora-classes="price price--compare">
                     <span class="visually-hidden">
@@ -4980,10 +4980,15 @@ var ProductMeta = class extends HTMLElement
                     </span>
                     <span>${formatMoney(variant.compare_at_price, currencyFormat)}</span>
                 </span>`;
+            productPrices.querySelector(".price--highlight").classList.add("price--large");
         } else {
-            // Regular price display (no sale)
-            productPrices.innerHTML += '<span class="price ${this.priceClass}" data-datora-classes="price price--highlight"><span class="visually-hidden">${window.themeVariables.strings.productSalePrice}</span>${formatMoney(variant.price, currencyFormat)}</span>';
-              // Original price (crossed out)
+            productPrices.innerHTML += `
+                <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
+                    <span class="visually-hidden">
+                        ${window.themeVariables.strings.productSalePrice}
+                    </span>
+                    ${formatMoney(variant.price, currencyFormat)}
+                </span>`;
             productPrices.innerHTML += `
                 <span class="hidden" data-datora-classes="price price--compare">
                     <span class="visually-hidden">
@@ -4991,6 +4996,7 @@ var ProductMeta = class extends HTMLElement
                     </span>
                     <span></span>
                 </span>`;
+            productPrices.querySelector(".price--highlight").classList.add("price--large");
         }
 
         // Add unit price measurement if available
