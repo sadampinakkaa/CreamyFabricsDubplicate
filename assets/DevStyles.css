@@ -189,7 +189,7 @@ span.bulletPointsContent {
 
 
 
-.product-meta.product-meta .product-meta__label-list.label-list span {
+.product-meta.product-meta .product-meta__label-list.label-list span:not([data-datora]) {
   text-transform: none;
   position: relative;
   display: inline-flex;
