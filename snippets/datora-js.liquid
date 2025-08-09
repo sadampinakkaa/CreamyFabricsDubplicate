@@ -185,6 +185,11 @@ window.addEventListener('co2.discountCodeSet', function(event){
   console.log("EventListener: co2.discountCodeSet");
 });
 
+window.addEventListener('variant:changed', function(event){
+  updateProductGridDiscounts();
+  console.log("EventListener: variant:changed");
+});
+
 document.documentElement.addEventListener('cart:refresh', () => {
   if(co2Initialized && co2CartUpdate){
     updateProductGridDiscounts();
