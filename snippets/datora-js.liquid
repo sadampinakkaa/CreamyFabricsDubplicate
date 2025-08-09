@@ -224,7 +224,12 @@ window.addEventListener('co2.cart.initialized', function() {
 
 window.addEventListener('co2.codelink', function(event){
   //updateProductGridDiscounts();
-  console.log("EventListener: co2.codelink");
+  console.log("EventListener: co2.codelink", event);
+  const successDiscountBar = document.querySelector("#successDiscountBar");
+  const successTextElm = successDiscountBar.querySelector("span");
+  const successTextElmData = successTextElm.getAttribute("data-text");
+  const addSuccessText = successTextElmData.replace("[[CODE]]",code);
+  console.log("addSuccessText", addSuccessText);
 });
 
 window.addEventListener('co2.discountCodeSet', function(event){
