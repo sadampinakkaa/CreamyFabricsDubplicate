@@ -6,11 +6,11 @@ const priceFormatter = new Intl.NumberFormat('de-DE', {
   currencyDisplay: 'symbol'
 });
 const formatPrice = function(price){
-  let formatted = priceFormatter.format(price);
+  const formatted = priceFormatter.format(price);
   console.log(formatted,encodeURIComponent(formatted));
-  let splitted = formatted.toString().split(/%C2%A0|\u00A0/)
-  console.log(splitted);
-  return splitted[1]+splitted[0];
+  const [amount, currency] = formatted.toString().split(/%C2%A0|\u00A0/)
+  console.log(amount, currency);
+  return currency+amount;
 }
 Shopify.formatMoney = function(cents, format) {
   if (typeof cents == 'string') {
