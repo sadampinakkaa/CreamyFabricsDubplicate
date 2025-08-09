@@ -4964,7 +4964,6 @@ var ProductMeta = class extends HTMLElement
   }
   _updatePrices(variant)
   {
-      console.log("this.priceClass", this.priceClass);
     let productPrices = this.querySelector("[data-product-price-list]"),
       currencyFormat = window.themeVariables.settings.currencyCodeEnabled ? window.themeVariables.settings.moneyWithCurrencyFormat : window.themeVariables.settings.moneyFormat;
     if (productPrices)
