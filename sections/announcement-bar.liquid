@@ -150,7 +150,7 @@
     </announcement-bar>
     {%- if section.settings.discount_show != blank -%}
       <div id="successDiscountBar" class="" 
-        style="--sdb-bg:{{ section.settings.discount_color_bg | default:'#080' }};--sdb-bg:{{ section.settings.discount_color_text | default:'#FFF' }};">
+        style="--sdb-bg:'{{ section.settings.discount_color_bg | default:'#080' }}';--sdb-bg:'{{ section.settings.discount_color_text | default:'#FFF' }}';">
         <svg
             height="14px"
             width="14px"
