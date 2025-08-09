@@ -379,12 +379,13 @@
               </div>
             </div>
           {%- endif -%}
+          <br />
+          <li hidden class="datora discount-badge">
+            {%- render 'icon' with 'discount-badge' -%}
+            <span data-datora></span>
+          </li>
         </div>
-        <br />
-        <li hidden class="datora discount-badge">
-           {%- render 'icon' with 'discount-badge' -%}
-           <span data-datora></span>
-        </li>
+        
       </div>
 
       {%- if settings.show_product_rating and reduced_content != true -%}
