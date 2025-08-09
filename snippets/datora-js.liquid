@@ -266,7 +266,7 @@ document.documentElement.addEventListener('cart:refresh', async (result) => {
     if(co2CheckError){
       const datoraContainer = document.querySelector('.datora-discount-field-container');
       if(datoraContainer) datoraContainer.classList.add('error');
-      co2CheckError = false;
+      //co2CheckError = false;
     }else if(co2CheckApply){
       const cartContent = await (await fetch(`${window.themeVariables.routes.cartUrl}.js`, {cache: 'reload'})).json();
       console.log("cartContent", cartContent, cartContent.discount_codes, cartContent.discount_codes.length);
