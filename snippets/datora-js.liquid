@@ -31,7 +31,7 @@ const applyDatoraDiscount = async function() {
     return;
   }
   const datoraContainer = datoraInput.closest('.datora-discount-field-container');
-  if(datoraContainer) datoraContainer.classList.remove('error');
+  errorDatoraDiscount('hide');
   if(datoraContainer) datoraContainer.classList.add('loading');
   if (typeof co2 !== 'undefined' && typeof co2.setDiscountCode === 'function') {
     co2CheckApply = discountCode.trim().toUpperCase();
@@ -39,7 +39,6 @@ const applyDatoraDiscount = async function() {
     if(getCurrentDiscountCode){ co2CheckReverse = getCurrentDiscountCode; }
     if(getCurrentDiscountCode && getCurrentDiscountCode.trim().toUpperCase() === discountCode.trim().toUpperCase()){
       if(datoraContainer) datoraContainer.classList.remove('loading');
-      if(datoraContainer) datoraContainer.classList.add('error');
       errorDatoraDiscount('show', 'double', discountCode);
       return;
     }
@@ -58,7 +57,9 @@ const applyDatoraDiscount = async function() {
 };
 
 const removeDatoraDiscount = async function() {
+  errorDatoraDiscount('hide');
   const datoraCodeContainer = document.querySelector('.datora-discount-field-container');
+  if(datoraContainer) datoraContainer.classList.add('loading');
   const datoraCodeApplied = datoraCodeContainer.querySelectorAll('.applied-discount');
   if (typeof co2 !== 'undefined' && typeof co2.removeDiscountCode === 'function') {
     datoraCodeApplied.forEach(element => {
@@ -74,10 +75,7 @@ const removeDatoraDiscount = async function() {
       const datoraInput = document.querySelector('input[name="datora-discount"][form="datora-form"]') || 
                           document.querySelector('input[name="datora-discount"]');
       if (datoraInput) datoraInput.value = '';
-      const datoraContainer = datoraInput?.closest('.datora-discount-field-container');
-      if (datoraContainer) {
-        datoraContainer.classList.remove('error', 'done', 'loading');
-      }
+      if(datoraContainer) datoraContainer.classList.remove('loading');
       document.querySelectorAll('.discounted[data-datora-price]').forEach(div => {
         resetProductGridDiscount(div);
       });
