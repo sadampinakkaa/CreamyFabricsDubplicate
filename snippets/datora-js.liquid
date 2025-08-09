@@ -8,7 +8,8 @@ const priceFormatter = new Intl.NumberFormat('de-DE', {
 const formatPrice = function(price){
   const formatted = priceFormatter.format(price);
   console.log(formatted);
-  const splitted = formatted.split('&nbsp;');
+  const splitted = formatted.split(' ');
+  console.log(splitted);
   return splitted[1]+splitted[0];
 }
 Shopify.formatMoney = function(cents, format) {
