@@ -92,7 +92,7 @@
   }
   .datora-discount-field-container .datora-discount-error{
 	align-items: center;
-    border: 1px solid #f5c6cb;
+    border: 1px solid var(--edb-border);
     box-sizing: border-box;
     display: none;
     font-size: 13px;
@@ -101,8 +101,8 @@
     padding: 8px 32px 8px 8px;
     position: relative;
     width: 100%;
-  	background-color: #f8d7da;
-    color: #721c24;
+  	background-color: var(--edb-bg);
+    color: var(--edb-text);
   }
   cart-drawer.error .datora-discount-field-container .datora-discount-error,
   .datora-discount-field-container.error .datora-discount-error{
