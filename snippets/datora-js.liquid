@@ -105,7 +105,7 @@ function resetProductGridDiscount(div){
       div.querySelector('.price--compare').classList.add('hidden');
     }
   }
-  const basePriceFormatted = priceFormatter.format(oldPrice / 100);
+  const basePriceFormatted = formatPrice(oldPrice / 100);
   div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').textContent = basePriceFormatted;
   if(priceClass != ""){
     div.querySelector('.price-list .price:not(.price--compare) span:not(.visually-hidden)').classList.add(priceClass);
@@ -151,7 +151,7 @@ async function updateProductGridDiscounts() {
       try {
         //console.log("updateProductGridDiscounts 2",Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
         const data = await co2.itemDiscountFull(Number(pid), Number(vid), tags ? tags.split(',') : [], Number(price), 1, spgid === "" || "false" ? null : spgid);
-        const basePriceFormatted = priceFormatter.format(price / 100);
+        const basePriceFormatted = formatPrice(price / 100);
         if(data){
           //console.log("Discount Data", data);
           if (data.calc === "perc" && data.discPerc > 0) {
@@ -159,14 +159,14 @@ async function updateProductGridDiscounts() {
             const discountedPrice = price - price * data.discPerc / 100;
             newPrice = formatPrice(discountedPrice / 100);
             const discountValue = price * data.discPerc / 100;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+            const formattedDiscountValue = formatPrice(discountValue / 100);
             badgeText = `-${data.discPerc}% (${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           } else if (data.calc === "amt" && data.discAmt > 0) {
             validDisc = true;
             const discountedPrice = price - data.discAmt * 100;
             newPrice = formatPrice(discountedPrice / 100);
             const discountValue = price - discountedPrice;
-            const formattedDiscountValue = priceFormatter.format(discountValue / 100);
+            const formattedDiscountValue = formatPrice(discountValue / 100);
             badgeText = `(-${formattedDiscountValue}) ${getDiscountCode.toUpperCase()}`;
           }
           if(validDisc){
@@ -178,7 +178,7 @@ async function updateProductGridDiscounts() {
             if(metaFormId && document.querySelector("product-sticky-form[form-id='"+metaFormId+"']")){
               document.querySelector("product-sticky-form[form-id='"+metaFormId+"'] .product-sticky-form__price span:not(.visually-hidden)").textContent = newPrice;
             }
-            const originalPriceAsComparePrice = priceFormatter.format(price / 100);
+            const originalPriceAsComparePrice = formatPrice(price / 100);
             setDatoraClasses(div, originalPriceAsComparePrice);
             div.querySelector('[data-datora]').innerHTML = badgeText;
             const badge = div.querySelector('.datora.discount-badge');
