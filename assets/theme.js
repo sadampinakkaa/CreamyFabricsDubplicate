@@ -4982,13 +4982,7 @@ var ProductMeta = class extends HTMLElement
                 </span>`;
         } else {
             // Regular price display (no sale)
-            productPrices.innerHTML += '
-                <span class="price ${this.priceClass}" data-datora-classes="price price--highlight">
-                    <span class="visually-hidden">
-                        ${window.themeVariables.strings.productSalePrice}
-                    </span>
-                    ${formatMoney(variant.price, currencyFormat)}
-                </span>';
+            productPrices.innerHTML += '<span class="price ${this.priceClass}" data-datora-classes="price price--highlight"><span class="visually-hidden">${window.themeVariables.strings.productSalePrice}</span>${formatMoney(variant.price, currencyFormat)}</span>';
               // Original price (crossed out)
             productPrices.innerHTML += `
                 <span class="hidden" data-datora-classes="price price--compare">
