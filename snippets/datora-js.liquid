@@ -255,15 +255,17 @@ window.addEventListener('variant:changed', function(event){
   console.log("EventListener: variant:changed");
 });
 
-document.documentElement.addEventListener('cart:refresh', (result) => {
+document.documentElement.addEventListener('cart:refresh', async (result) => {
   console.log(result);
   if(co2Initialized && co2CartUpdate){
     updateProductGridDiscounts();
     console.log("EventListener: cart:refresh");
     if(co2CheckApply){
-      const getCurrentDiscountCode = co2.getDiscountCode();
-      if(co2CheckApply !== getCurrentDiscountCode.trim().toUpperCase()){
-        console.log("co2CheckApply faild");
+      const getCurrentDiscountCode = await co2.getDiscountCode();
+      if(getCurrentDiscountCode){
+        if(co2CheckApply !== getCurrentDiscountCode.trim().toUpperCase()){
+          console.log("co2CheckApply faild");
+        }
       }
     }
   }else{
