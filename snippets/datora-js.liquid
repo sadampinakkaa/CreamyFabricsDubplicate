@@ -7,6 +7,7 @@ const priceFormatter = new Intl.NumberFormat('de-DE', {
 });
 const formatPrice = function(price){
   const formatted = priceFormatter.format(price);
+  console.log(formatted);
   const splitted = formatted.split('&nbsp;');
   return splitted[1]+splitted[0];
 }
