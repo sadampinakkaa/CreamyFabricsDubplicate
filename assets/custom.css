@@ -65,20 +65,7 @@
   .datora-discount-field-container .datora-submit.hidden {
 	display: none !important;
   }
-  
-  .datora-discount-field-container + .error-msg {
-	display: none;
-	color: red;
-	margin: 0;
-  }
-  
-  .datora-discount-field-container.error [name="datora-discount"] {
-	border: 2px solid red;
-  }
-  
-  .datora-discount-field-container.error + .error-msg {
-	display: block;
-  }
+
 
   .datora-discount-field-container.loading :is(.applied-discount, .input__field, .datora-submit){
 	pointer-events: none;
