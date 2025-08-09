@@ -92,9 +92,9 @@
     </div>
   </section>
   <script>
-    window.addEventListener('co2.cart.initialized', function() {
+    if (typeof co2 !== 'undefined') {
       updateProductGridDiscounts();
-    });
+    }
   </script>
 {%- else -%}
   {%- comment -%}
