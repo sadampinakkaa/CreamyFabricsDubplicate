@@ -187,7 +187,12 @@ span.bulletPointsContent {
 }
 
 
-
+.product-meta__price-list-container {
+    align-items: end;
+    margin-block-start: 0 !important;
+    display: flex;
+    justify-content: space-between;
+}
 
 .product-meta.product-meta .product-meta__label-list.label-list span:not([data-datora]) {
   text-transform: none;
