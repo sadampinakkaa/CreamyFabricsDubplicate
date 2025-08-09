@@ -43,7 +43,7 @@
     "color_swatch_config": "Schwarz/Braun/Beige: linear-gradient(to right, #000000 0%, #000000 33.33%, #8b4512 33.33%, #8b4512 66.66%, #dbbcaa 66.66%, #dbbcaa 100%)\nSchwarz:#000000\t\n\nBraun:#8b4512\nBeige: #dbbcaa\nDesert: #C2A482\nOff-White: #EFEDE8\nWeiß: #F5F5F0\nEcru: #E1D8C5\nKakao: #5C3B2E\nGrau: #B0B0B0\nRot: #C21E1E\nPink: #E91E63\nCandy Pink: #FF80AB\nBaby Blue: #89CFF0\nBaby Pink: #F4C2C2\nBaby Yellow: #FCEF91\nSage Green: #9AAB89\nLavendel: #E4CEF2\nBurgundy: #800020\nMocha: #967969\nPink Nude: #F2DADF\nDark Taupe: #D2C9C7\nAsh Brown:  #665E59\nFire Red: #ff0000\nOatmeal: #D8C29D\nDark Beige: #CBB595\ncrystal pink: #EDD0CE\nArtic Ice: #A7C9E3\nAsh Grey: #B2BEB5\nWit: #F5F5F0\nVuur rood: #ff0000\nBruin: #8b4512\nAnthrazit: #383E42\n\n\nDesert/Ecru: linear-gradient(to right, #C2A482 0%, #C2A482 50%, #E1D8C5 50%, #E1D8C5 100%)\nOff-White/Ecru: linear-gradient(to right, #EFEDE8 0%, #EFEDE8 50%, #E1D8C5 50%, #E1D8C5 100%)\nWeiß/Off-White: linear-gradient(to right, #F5F5F0 0%, #F5F5F0 50%, #EFEDE8 50%, #EFEDE8 100%)\nKakao/Grau: linear-gradient(to right, #5C3B2E 0%, #5C3B2E 50%, #B0B0B0 50%, #B0B0B0 100%)\nRot/Pink: linear-gradient(to right, #C21E1E 0%, #C21E1E 50%, #E91E63 50%, #E91E63 100%)\nPink/Candy Pink: linear-gradient(to right, #E91E63 0%, #E91E63 50%, #FF80AB 50%, #FF80AB 100%)",
     "show_vendor": false,
     "show_secondary_image": true,
-    "product_add_to_cart": true,
+    "product_add_to_cart": false,
     "show_product_rating": false,
     "show_discount": false,
     "discount_mode": "saving",
