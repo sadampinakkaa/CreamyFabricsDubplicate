@@ -152,11 +152,16 @@
 
   cart-drawer .datora-payments ul li{
 	width: 100%;
+	max-width:48px;
   }
   cart-drawer .datora-payments ul li svg{
 	width: 100%;
 	height:auto;
   }
+
+  cart-drawer .datora-payments ul li svg[aria-labelledby='pi-apple_pay'] > path[d]:nth-of-type(1){
+	opacity:0.07 !important;
+}
 
   
   /* End Datora */
