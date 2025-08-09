@@ -210,6 +210,10 @@ span.bulletPointsContent {
   width: max-content;
 }
 
+.product-meta.product-meta .product-meta__label-list.label-list:not(:has(.label.label--highlight)) discount-badge {
+  margin-bottom: 0 !important;
+}
+
 .product-meta__price-list-container .price-list {
   justify-content:left !important;
 }
