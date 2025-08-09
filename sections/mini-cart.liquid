@@ -551,7 +551,7 @@
 
       <div class="dgs-block-payments">
         <ul>
-          {% assign payment_types = section.settings.payment_icons %}
+          {% assign payment_types = section.settings.payment_icons | newline_to_br | split: '<br />' %}
           {%- for type in payment_types -%}
             <li>
               {% comment %}
