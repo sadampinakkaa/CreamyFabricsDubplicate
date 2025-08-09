@@ -109,6 +109,7 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
       }else if(reason == "double"){
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').value = '';
+        if(datoraContainer) datoraContainer.querySelector('.datora-input input').classList.remove('is-filled');
         if(datoraContainer) datoraContainer.querySelector('.datora-input input').focus();
       }
     }else{
