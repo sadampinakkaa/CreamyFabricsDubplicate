@@ -6,6 +6,8 @@ let co2CartUpdate = false;
 let co2CheckApply = false;
 let co2CheckReverse = false;
 
+const truncate = (str, len = 10) => str.length > len ? str.substring(0, len) + '...' : str;
+
 const priceFormatter = new Intl.NumberFormat('de-DE', {
   style: 'currency',
   currency: 'EUR',
@@ -103,7 +105,7 @@ function errorDatoraDiscount(type = 'show', reason = 'invalid', code = '') {
     let errorAlert = window.datoraErrors[reason] ?? false;
     if(!errorAlert) return;
     const cleanCode = code.trim().toUpperCase();
-    errorAlert = errorAlert.replace("[[CODE]]",cleanCode);
+    errorAlert = errorAlert.replace("[[CODE]]",truncate(cleanCode,10));
     if(reason != "invalid"){
       if(datoraContainer) datoraContainer.classList.add('error');
       if(reason == "empty"){
