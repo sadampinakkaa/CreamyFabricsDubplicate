@@ -62,6 +62,7 @@ const removeDatoraDiscount = async function() {
 
       document.querySelectorAll('.discounted[data-datora-price]').forEach(div => {
         const oldPrice = div.dataset.datoraPrice;
+        resetProductGridDiscount(div);
       });
 
       datoraCodeApplied[0].disabled = false;
