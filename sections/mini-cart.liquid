@@ -743,7 +743,15 @@
       "label": "Custom Component",
       "default": "Custom text"
     },
+
     {
+      "type": "checkbox",
+      "id": "datora_payments",
+      "label": "Enable Payment Icons",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.datora_payments }}",
       "type": "textarea",
       "id": "payment_icons",
       "label": "Payment Icons",
