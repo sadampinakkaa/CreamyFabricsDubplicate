@@ -104,9 +104,9 @@ function errorDatoraDiscount(type = 'show', reason = 'failed', code = '') {
     if(reason == "double"){
       if(datoraContainer) datoraContainer.classList.add('error');
     }else if(reason == "invalid"){
-      if(datoraContainer) datoraContainer.classList.add('error');
+      if(cartDrawer) cartDrawer.classList.add('error');
     }else{
-      if(cartDrawer) datoraContainer.classList.add('error');
+      if(datoraContainer) datoraContainer.classList.add('error');
     }
     if(datoraContainer) datoraContainer.querySelector('.datora-discount-error span').innerHTML = errorAlert;
   }else{
