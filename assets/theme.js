@@ -6008,3 +6008,21 @@ focus-trap/dist/focus-trap.esm.js:
   *)
 */
 //# sourceMappingURL=/s/files/1/0792/0687/5483/t/47/assets/theme.js.map?v=1732813777
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    function hbBetCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    const getDiscountCode = hbBetCookie('discount_code');
+
+    if (getDiscountCode) {
+        document.querySelectorAll(".datora.discount-badge").forEach(element => {
+            element.textContent = getDiscountCode;
+        });
+    }
+});
